@@ -33,10 +33,20 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testBestSalt() {
 		$salt = CryptUser::bestSalt();
-		$this->assertGreaterThan(strlen($salt), 0, 'Best salt string length.');
+		$this->assertGreaterThan(0, strlen($salt), 'Best salt string length.');
 	}
 	
 	
+	/**
+	 * Test hashPassword function
+	 */
+	public function testHashPassword() {
+		$salt = CryptUser::bestSalt();
+		$password = 'testPassword';
+		
+		$hash = CryptUser::hashPassword($password, $salt);
+		$this->assertEquals($hash, CryptUser::hashPassword($password, $hash), 'Hash passwords equal.');
+	}
 
 }
 
