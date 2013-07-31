@@ -235,11 +235,11 @@ class CryptUser {
 	 * same. If no salt is provided then the best salt for this server will be generated.
 	 * @return string The hashed password.
 	 */
-	public function hashPassword($password, $salt = NULL) {
+	public static function hashPassword($password, $salt = NULL) {
 		// if password empty then return empty
 		if( empty($password) ) return '';
 
-		if( is_null($salt) ) $salt = $this->bestSalt();
+		if( is_null($salt) ) $salt = cryptUser::bestSalt();
 
 		return crypt($password, $salt);
 	}
@@ -249,7 +249,7 @@ class CryptUser {
 	 * Determine the best salt to use for the crypt function on this server.
 	 * @return string The salt to be used with crypt.
 	 */
-	public function bestSalt() {
+	public static function bestSalt() {
 		if( defined('CRYPT_SHA512') && CRYPT_SHA512 == 1 ) return '$6$' . SSLKey::makePhrase(16) . '$';
 		if( defined('CRYPT_SHA256') && CRYPT_SHA256 == 1 ) return '$5$' . SSLKey::makePhrase(16) . '$';
 		if( defined('CRYPT_BLOWFISH') && CRYPT_BLOWFISH == 1 ) return '$2a$07$' . base64_encode(SSLKey::makePhrase(22)) . '$';
