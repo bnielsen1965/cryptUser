@@ -33,7 +33,7 @@ class CryptUser {
 	 * Class constants
 	 */
 	const ACL_ADMIN_FLAG = 1;
-	const ACL_ACTIVE = 2;
+	const ACL_ACTIVE_FLAG = 2;
 	
 	
 	/**
@@ -55,12 +55,11 @@ class CryptUser {
 	 * @param string $password The password for this user.
 	 * @param string $dataSource An object to provide the user data.
 	 */
-	function __construct($username, $password, $dataSource) {
+	function __construct($username, $password, $dataSource = NULL) {
 		$this->username = $username;
 		$this->password = $password;
-//		$this->passwordHash = $this->hashPassword($password);
 		$this->dataSource = $dataSource;
-		$this->loadUser();
+		if (!empty($this->dataSource)) $this->loadUser();
 	}
 	
 	
@@ -78,7 +77,7 @@ class CryptUser {
 				$this->passwordHash = $userData['passwordHash'];
 				
 				// authenticate user by checking data source password hash with a hash of the provided password
-				if ($this->passwordHash == $this->hashPassword($this->password)) $this->authenticated = TRUE;
+				if ($this->passwordHash == $this->hashPassword($this->password, $this->passwordHash)) $this->authenticated = TRUE;
 				else $this->authenticated = FALSE;
 				
 				// if authenticated then build the user's primary key and set flags
@@ -88,6 +87,7 @@ class CryptUser {
 							SSLKey::parsePrivateKey($userData['sslKey']), 
 							SSLKey::parseCertificate($userData['sslKey'])
 					);
+					
 					$this->flags = $userData['flags'];
 				}
 				
@@ -166,7 +166,7 @@ class CryptUser {
 	 */
 	public function isAdmin() {
 		// check flags against admin mask
-		return $this->isACLFlagSet(ACL_ADMIN_FLAG);
+		return $this->isACLFlagSet(CryptUser::ACL_ADMIN_FLAG);
 	}
 	
 	
@@ -176,7 +176,7 @@ class CryptUser {
 	 */
 	public function isActive() {
 		// check flags against active mask
-		return $this->isACLFlagSet(ACL_ACTIVE);
+		return $this->isACLFlagSet(CryptUser::ACL_ACTIVE_FLAG);
 	}
 	
 	

@@ -47,6 +47,19 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 		$hash = CryptUser::hashPassword($password, $salt);
 		$this->assertEquals($hash, CryptUser::hashPassword($password, $hash), 'Hash passwords equal.');
 	}
+	
+	
+	/**
+	 * Test ACL flags
+	 */
+	public function testACLFlags() {
+		// create a dummy user with no data source
+		$user = new CryptUser('dummy', 'dummyPassword');
+		
+		// set admin and active flags for the dummy
+		$user->setACLFlags(CryptUser::ACL_ADMIN_FLAG | CryptUser::ACL_ACTIVE_FLAG);
+		$this->assertTrue($user->isActive() && $user->isAdmin(), 'ACL flags set.');
+	}
 
 }
 
