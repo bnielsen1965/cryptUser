@@ -29,7 +29,6 @@ require_once 'CryptDataSource.php';
  * @copyright Copyright 2013, Bryan Nielsen
  */
 class CryptJSONSource implements CryptDataSource {
-	private $sourceType;
 	private $filename;
 	private $errors;
 	private $lockedFilePointer; // pointer to the currently open locked file
@@ -46,9 +45,20 @@ class CryptJSONSource implements CryptDataSource {
 		$this->lockedFilename = '';
 		
 		$this->errors = array();
-		$this->sourceType = 'JSON';
 		$this->filename = $filename;
 	}
+	
+	
+	/**
+	 * Get source type
+	 * 
+	 * @return string The data source type.
+	 */
+	public function getSourceType() {
+		return 'JSON';
+	}
+	
+	
 	/**
 	 * Get array of users that match a given name.
 	 * @param string $username The username to search for in the data source.

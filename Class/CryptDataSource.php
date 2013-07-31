@@ -28,6 +28,14 @@
  */
 interface CryptDataSource {
 	/**
+	 * Get the source type. This function should return a string representing
+	 * the type of data source, i.e. 'JSON' or 'MySQL'.
+	 * 
+	 * @return string The data source type.
+	 */
+	public function getSourceType();
+	
+	/**
 	 * Get array of user elements that match a given name.
 	 * The aray of user elements may come from any type of data source, a database
 	 * table, a flat file, etc., but the returned user array must include the following
