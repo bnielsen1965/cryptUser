@@ -60,6 +60,23 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 		$user->setACLFlags(CryptUser::ACL_ADMIN_FLAG | CryptUser::ACL_ACTIVE_FLAG);
 		$this->assertTrue($user->isActive() && $user->isAdmin(), 'ACL flags set.');
 	}
+	
+	
+	/**
+	 * Test encryption
+	 */
+	public function testEncryption() {
+		// create a dummy user with no data source
+		$user = new CryptUser('dummy', 'dummyPassword');
+		
+		// set encryption key
+		$user->setPrimaryKey();
+		
+		$testString = 'The quick brown fox.';
+		$eString = $user->encryptPackage($testString);
+		$dString = $user->decryptPackage($eString['package'], $eString['envelope']);
+		$this->assertEquals($testString, $dString, 'Encryption and decryption equal.');
+	}
 
 }
 
