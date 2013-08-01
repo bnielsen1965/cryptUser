@@ -3,6 +3,10 @@
 cryptUser is a set of PHP class files used to create and manage user accounts.
 The user objects include the ability to use openSSL to encrypt user content.
 
+## WARNING
+
+cryptUser is currently under development and is incomplete!
+
 ---------------------------------
 
 

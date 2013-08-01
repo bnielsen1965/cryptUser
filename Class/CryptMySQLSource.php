@@ -41,7 +41,7 @@ class CryptMySQLSource implements CryptDataSource {
 		if (!empty($databaseConfig['host']) && !empty($databaseConfig['username']) && !empty($databaseConfig['password']) && !empty($databaseConfig['database'])) {
 			$this->mysqli = new mysqli($databaseConfig['host'], $databaseConfig['username'], $databaseConfig['password'], $databaseConfig['database']);
 			
-			if( $this->mysqli->connect_errno ) {
+			if ($this->mysqli->connect_errno) {
 				$this->errors[] = "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
 			}
 		}
@@ -57,6 +57,92 @@ class CryptMySQLSource implements CryptDataSource {
 		return 'MySQL';
 	}
 	
+	
+	/**
+	 * Get array of users that match a given name.
+	 * @param string $username The username to search for in the data source.
+	 * @return array|boolean An array of arrays containing user elements to create a user
+	 * or FALSE if not found.
+	 */
+	public function getUserByName($username, $usersTable = 'users') {
+		$sql = "SELECT * FROM " . $usersTable . " WHERE username='" . mysqli_real_escape_string($username) . "'";
+		$rs = $this->mysqli->query($sql);
+		if ($rs && $rs->num_rows) {
+			return $rs->fetch_assoc();
+		}
+		
+		// failed to find user
+		return FALSE;
+	}
+	
+	
+	/**
+	 * Save the provided user details in the data source.
+	 * @param array $user An array of user elements to be saved.
+	 * @return boolean Returns TRUE on success and FALSE on failure.
+	 */
+	public function saveUser($user, $usersTable = 'users') {
+		$sql = "INSERT INTO " . $usersTable . "";
+		// determine if user exists
+		if (($ui = $this->searchUsersForUser($users, $user['username'])) !== FALSE) {
+			// found user index, update user
+			$users[$ui] = $user;
+		}
+		else {
+			// user not found, add to users
+			$users[] = $user;
+		}
+		
+		return $this->lockedWrite($this->filename, json_encode($users));
+	}
+	
+	
+	/**
+	 * Search provided users array for the specified user.
+	 * @param array $users An array of user rows to search.
+	 * @return integer|boolean The array index for the user name or FALSE if not found.
+	 */
+	private function searchUsersForUser($users, $username) {
+		if ($users) {
+			foreach ($users as $ui => $user) {
+				if ($user['username'] == $username) return $ui;
+			}
+		}
+		
+		return FALSE;
+	}
+	
+	
+	/**
+	 * Get SQL to create users table.
+	 * 
+	 * @param string $usersTable An optional table name for users table.
+	 * @return string SQL statement to create user table.
+	 */
+	public function getCreateUserTableSQL($usersTable = 'users') {
+		return "CREATE TABLE `" . $usersTable . "` (" . 
+				"`username` VARCHAR (255), " . 
+				"`passwordHash` VARCHAR (255) DEFAULT '', " . 
+				"`sslKey` TEXT DEFAULT '', " . 
+				"`flags` INTEGER DEFAULT 0, " . 
+				"PRIMARY KEY (`username`) " . 
+				") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+	}
+	
+	
+	/**
+	 * Create users table.
+	 * 
+	 * @param string $createSQL Optional SQL statement to create the users table.
+	 */
+	public function createUsersTable($usersTable = 'users', $createSQL = NULL) {
+		if ($this->mysqli->ping()) {
+			if (empty($createSQL)) $createSQL = $this->getCreateUserTableSQL($usersTable);
+			return $this->mysqli->query($createSQL);
+		}
+		
+		return FALSE;
+	}
 }
 
 ?>

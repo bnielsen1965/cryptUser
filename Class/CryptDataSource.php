@@ -55,11 +55,6 @@ interface CryptDataSource {
 	 */
 	public function saveUser($user);
 	
-	/**
-	* Get the current object error messages.
-	* @return array The current error messages.
-	*/
-	public function getErrors();
 }
 
 ?>
