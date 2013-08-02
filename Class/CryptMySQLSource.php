@@ -20,6 +20,8 @@
 * along with cryptUser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+require_once 'CryptDataSource.php';
+
 /**
  * Description of CryptMySQLSource
  *
@@ -28,6 +30,7 @@
 class CryptMySQLSource implements CryptDataSource {
 	private $mysqli;
 	private $errors;
+	private $usersTable;
 	
 	
 	/**
@@ -45,6 +48,9 @@ class CryptMySQLSource implements CryptDataSource {
 				$this->errors[] = "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
 			}
 		}
+		
+		if (!empty($databaseConfig['usersTable'])) $this->usersTable = $databaseConfig['usersTable'];
+		else $this->usersTable = 'users';
 	}
 	
 	
@@ -64,8 +70,8 @@ class CryptMySQLSource implements CryptDataSource {
 	 * @return array|boolean An array of arrays containing user elements to create a user
 	 * or FALSE if not found.
 	 */
-	public function getUserByName($username, $usersTable = 'users') {
-		$sql = "SELECT * FROM " . $usersTable . " WHERE username='" . mysqli_real_escape_string($username) . "'";
+	public function getUserByName($username) {
+		$sql = "SELECT * FROM " . $this->usersTable . " WHERE username='" . $this->mysqli->real_escape_string($username) . "'";
 		$rs = $this->mysqli->query($sql);
 		if ($rs && $rs->num_rows) {
 			return $rs->fetch_assoc();
@@ -81,19 +87,26 @@ class CryptMySQLSource implements CryptDataSource {
 	 * @param array $user An array of user elements to be saved.
 	 * @return boolean Returns TRUE on success and FALSE on failure.
 	 */
-	public function saveUser($user, $usersTable = 'users') {
-		$sql = "INSERT INTO " . $usersTable . "";
-		// determine if user exists
-		if (($ui = $this->searchUsersForUser($users, $user['username'])) !== FALSE) {
-			// found user index, update user
-			$users[$ui] = $user;
+	public function saveUser($user) {
+		if ($this->getUserByName($user['username']) !== FALSE) {
+			// user exists, update
+			$sql = "UPDATE " . $this->usersTable . " SET " .
+					"passwordHash='" . $this->mysqli->real_escape_string($user['passwordHash']) . "', " .
+					"sslKey='" . $this->mysqli->real_escape_string($user['sslKey']) . "', " .
+					"flags='" . $this->mysqli->real_escape_string($user['flags']) . "' " .
+					"WHERE username='" . $this->mysqli->real_escape_string($user['username']) . "'";
 		}
 		else {
-			// user not found, add to users
-			$users[] = $user;
+			// user does not exist, insert
+			$sql = "INSERT INTO " . $this->usersTable . "(username, passwordHash, sslKey, flags) VALUES (" .
+				"'" . $this->mysqli->real_escape_string($user['username']) . "', " .
+				"'" . $this->mysqli->real_escape_string($user['passwordHash']) . "', " .
+				"'" . $this->mysqli->real_escape_string($user['sslKey']) . "', " .
+				"'" . $this->mysqli->real_escape_string($user['flags']) . "'" .
+				")";
 		}
 		
-		return $this->lockedWrite($this->filename, json_encode($users));
+		return $this->mysqli->query($sql);
 	}
 	
 	
@@ -116,11 +129,10 @@ class CryptMySQLSource implements CryptDataSource {
 	/**
 	 * Get SQL to create users table.
 	 * 
-	 * @param string $usersTable An optional table name for users table.
 	 * @return string SQL statement to create user table.
 	 */
-	public function getCreateUserTableSQL($usersTable = 'users') {
-		return "CREATE TABLE `" . $usersTable . "` (" . 
+	public function getCreateUserTableSQL() {
+		return "CREATE TABLE `" . $this->usersTable . "` (" . 
 				"`username` VARCHAR (255), " . 
 				"`passwordHash` VARCHAR (255) DEFAULT '', " . 
 				"`sslKey` TEXT DEFAULT '', " . 
@@ -135,9 +147,9 @@ class CryptMySQLSource implements CryptDataSource {
 	 * 
 	 * @param string $createSQL Optional SQL statement to create the users table.
 	 */
-	public function createUsersTable($usersTable = 'users', $createSQL = NULL) {
+	public function createUsersTable($createSQL = NULL) {
 		if ($this->mysqli->ping()) {
-			if (empty($createSQL)) $createSQL = $this->getCreateUserTableSQL($usersTable);
+			if (empty($createSQL)) $createSQL = $this->getCreateUserTableSQL();
 			return $this->mysqli->query($createSQL);
 		}
 		

@@ -58,7 +58,7 @@ $cert = $key->getFullKey();
 
 echo 'phrase:' . SSLKey::parsePhrase($cert) . ":<br>\n";
 
-echo 'cert:' . SSLKey::parseCert($cert) . ":<br>\n";
+echo 'cert:' . SSLKey::parseCertificate($cert) . ":<br>\n";
 
 echo 'pKey:' . SSLKey::parsePrivateKey($cert) . ":<br>\n";
 
