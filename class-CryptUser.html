@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class CryptUser | cryptUser</title>
+
+	<script type="text/javascript" src="resources/combined.js?368157054"></script>
+	<script type="text/javascript" src="elementlist.js?359993623"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-CryptJSONSource.html">CryptJSONSource</a></li>
+				<li><a href="class-CryptMySQLSource.html">CryptMySQLSource</a></li>
+				<li class="active"><a href="class-CryptUser.html">CryptUser</a></li>
+				<li><a href="class-CryptUserTest.html">CryptUserTest</a></li>
+				<li><a href="class-SSLKey.html">SSLKey</a></li>
+				<li><a href="class-SSLKeyTest.html">SSLKeyTest</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-CryptDataSource.html">CryptDataSource</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class CryptUser</h1>
+
+
+	<div class="description">
+	
+<p>User object.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Copyright:</b>
+				Copyright 2013, Bryan Nielsen<br />
+				<b>Author:</b>
+				Bryan Nielsen, <a
+href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
+		<b>Located at</b> <a href="source-class-CryptUser.html#25-261" title="Go to source code">Class/CryptUser.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-CryptUser.html#52-63" title="Go to source code">__construct</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$dataSource</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Object constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Object constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>username The username for this user.</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>$password The password for this user.</dd>
+					<dt><var>$dataSource</var></dt>
+					<dd><code>string</code><br>$dataSource An object to provide the user data.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="saveUser" id="_saveUser">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_saveUser">#</a>
+		<code><a href="source-class-CryptUser.html#103-114" title="Go to source code">saveUser</a>( )</code>
+
+		<div class="description short">
+			
+<p>Save this user to the data source</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Save this user to the data source</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPrimaryKey" id="_setPrimaryKey">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPrimaryKey">#</a>
+		<code><a href="source-class-CryptUser.html#117-126" title="Go to source code">setPrimaryKey</a>( <span>string <var>$key</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$certificate</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Set the primary SSLKey to use with this user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set the primary SSLKey to use with this user.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key Optional PEM encoded private key to use in generating the SSLKey.</dd>
+					<dt><var>$certificate</var></dt>
+					<dd><code>string</code><br>$certificate Optional PEM encoded certificate to use in generating the SSLKey.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setACLFlags" id="_setACLFlags">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setACLFlags">#</a>
+		<code><a href="source-class-CryptUser.html#129-138" title="Go to source code">setACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sets the Access Control Level flags specified in the flagMask variable.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sets the Access Control Level flags specified in the flagMask variable.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$flagMask</var></dt>
+					<dd><code>integer</code><br>$flagMask Integer containing the binary flags to turn on.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clearACLFlags" id="_clearACLFlags">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clearACLFlags">#</a>
+		<code><a href="source-class-CryptUser.html#141-150" title="Go to source code">clearACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Clears the Access Control Level flags specified in flagMask.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clears the Access Control Level flags specified in flagMask.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$flagMask</var></dt>
+					<dd><code>integer</code><br>$flagMask Integer containing the binary flags to turn off.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isACLFlagSet" id="_isACLFlagSet">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isACLFlagSet">#</a>
+		<code><a href="source-class-CryptUser.html#153-160" title="Go to source code">isACLFlagSet</a>( <span>integer <var>$flagMask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Test if the specified flags are set as specified in the flagMask
+argument.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Test if the specified flags are set as specified in the flagMask
+argument.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$flagMask</var></dt>
+					<dd><code>integer</code><br>$flagmask Integer containing the binary flags to test.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if the specified flags are set, FALSE if any of the flags are not set.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAdmin" id="_isAdmin">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAdmin">#</a>
+		<code><a href="source-class-CryptUser.html#163-170" title="Go to source code">isAdmin</a>( )</code>
+
+		<div class="description short">
+			
+<p>Determine if this user is an admin</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determine if this user is an admin</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if admin, FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isActive" id="_isActive">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isActive">#</a>
+		<code><a href="source-class-CryptUser.html#173-180" title="Go to source code">isActive</a>( )</code>
+
+		<div class="description short">
+			
+<p>Determine if this user account is active.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determine if this user account is active.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if active, FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="changePassword" id="_changePassword">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_changePassword">#</a>
+		<code><a href="source-class-CryptUser.html#183-201" title="Go to source code">changePassword</a>( <span>string <var>$password</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Change the user's password and the other user elements that rely on the
+password.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Change the user's password and the other user elements that rely on the
+password.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>$password The new password to use.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encryptPackage" id="_encryptPackage">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encryptPackage">#</a>
+		<code><a href="source-class-CryptUser.html#207-214" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Encrypt a package using the primary SSL key pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Encrypt a package using the primary SSL key pair.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$package</var></dt>
+					<dd><code>mixed</code><br>$package The package to encrypt.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array containing the envelope and encrypted package or NULL if an error
+occurs.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decryptPackage" id="_decryptPackage">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decryptPackage">#</a>
+		<code><a href="source-class-CryptUser.html#217-225" title="Go to source code">decryptPackage</a>( <span>string <var>$package</var></span>, <span>mixed <var>$envelope</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Decrypt the sealed package using the primary SSL key pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Decrypt the sealed package using the primary SSL key pair.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$package</var></dt>
+					<dd><code>string</code><br>$package The package to decrypt.</dd>
+					<dt><var>$envelope</var></dt>
+					<dd><code>mixed</code><br>$envelope The envelope for the package.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>The decrypted package or FALSE if there was an error.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hashPassword" id="_hashPassword">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hashPassword">#</a>
+		<code><a href="source-class-CryptUser.html#230-245" title="Go to source code">hashPassword</a>( <span>string <var>$password</var></span>, <span>string <var>$salt</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Hash the provided password string.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Hash the provided password string.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>$password The plain text user password.</dd>
+					<dt><var>$salt</var></dt>
+					<dd><code>string</code><br>$salt Optional salt to use with crypt. The salt must be provided when performing
+a password hash check to make sure the hash values come out the same. If no salt
+is provided then the best salt for this server will be generated.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The hashed password.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bestSalt" id="_bestSalt">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bestSalt">#</a>
+		<code><a href="source-class-CryptUser.html#248-260" title="Go to source code">bestSalt</a>( )</code>
+
+		<div class="description short">
+			
+<p>Determine the best salt to use for the crypt function on this server.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determine the best salt to use for the crypt function on this server.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The salt to be used with crypt.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="ACL_ADMIN_FLAG" id="ACL_ADMIN_FLAG">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-CryptUser.html#32-35" title="Go to source code"><b>ACL_ADMIN_FLAG</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#ACL_ADMIN_FLAG" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Class constants</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Class constants</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ACL_ACTIVE_FLAG" id="ACL_ACTIVE_FLAG">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-CryptUser.html#36" title="Go to source code"><b>ACL_ACTIVE_FLAG</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">2</span></code></td>
+		<td class="description"><div>
+			<a href="#ACL_ACTIVE_FLAG" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		cryptUser API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
