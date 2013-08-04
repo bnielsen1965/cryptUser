@@ -82,6 +82,27 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	/**
+	 * Get a list of usernames
+	 * @return array An array of strings containing the usernames from the data source.
+	 */
+	public function getUsernames() {
+		$usersJSON = $this->lockedRead($this->filename);
+		$users = json_decode($usersJSON, TRUE);
+		
+		if ($users) {
+			$usernames = array();
+			
+			foreach ($users as $user) {
+				$usernames[] = $user['username'];
+			}
+			
+			return $usernames;
+		}
+		else return FALSE;
+	}
+	
+	
+	/**
 	 * Save the provided user details in the data source.
 	 * @param array $user An array of user elements to be saved.
 	 * @return boolean Returns TRUE on success and FALSE on failure.
@@ -106,6 +127,32 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	/**
+	 * Delete the specified user from the data source.
+	 * @param string $username The username of the user to delete.
+	 * @return boolean Returns TRUE on success and FALSE on failure.
+	 */
+	public function deleteUser($username) {
+		// read the JSON file
+		$usersJSON = $this->lockedRead($this->filename);
+		$users = json_decode($usersJSON, TRUE);
+		
+		// find the index to the specified user
+		$userIndex = $this->searchUsersForUser($users, $username);
+		
+		if ($userIndex !== FALSE) {
+			// remove the user from the list
+			unset($users[$userIndex]);
+			
+			// save the list
+			return $this->lockedWrite($this->filename, json_encode($users));
+		}
+		else {
+			return FALSE;
+		}
+	}
+	
+	
+	/**
 	 * Search provided users array for the specified user.
 	 * @param array $users An array of user rows to search.
 	 * @return integer|boolean The array index for the user name or FALSE if not found.
@@ -119,6 +166,8 @@ class CryptJSONSource implements CryptDataSource {
 		
 		return FALSE;
 	}
+	
+	
 	
 	
 	

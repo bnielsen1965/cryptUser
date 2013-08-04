@@ -49,6 +49,12 @@ interface CryptDataSource {
 	public function getUserByName($username);
 	
 	/**
+	 * Get a list of usernames 
+	 * @return array An array of strings containing the usernames from the data source.
+	 */
+	public function getUsernames();
+	
+	/**
 	 * Save the provided user details in the data source.
 	 * @param array $user An array of user elements to be saved.
 	 * @return boolean Returns TRUE on success and FALSE on failure.
