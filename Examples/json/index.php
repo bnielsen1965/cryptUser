@@ -1,14 +1,19 @@
 <?php
-// using CryptUser class
-include '../../Class/CryptUser.php';
+/**
+ * This is an example PHP script to demonstrate the use of the CryptUser class
+ * for user management and data encryption. The code in this script is organized 
+ * into functional blocks to make it easier to see how a functional form is 
+ * processed.
+ */
 
-// using a JSON data source
-include '../../Class/CryptJSONSource.php';
+// The user class and a datasource class are required.
+require_once '../../Class/CryptUser.php';
+require_once '../../Class/CryptJSONSource.php';
 
-// JSON file path for the data source
+// The JSON data source will require a source file.
 $filePath = dirname(__FILE__) . '/users.json';
 
-// create the data source object
+// Create the data source object for this application using the profided file.
 $dataSource = new CryptJSONSource($filePath);
 
 ?>
@@ -37,6 +42,9 @@ $dataSource = new CryptJSONSource($filePath);
 		<br><br>
 		
 		
+		<!--
+		This form and block of code provide a simple demonstration of user creation.
+		-->
 		<div>Create new user</div>
 		<div>
 			<form method="post">
@@ -47,13 +55,31 @@ $dataSource = new CryptJSONSource($filePath);
 			</form>
 			
 <?php
+/**
+ * When the create user form is submitted a user instance is created using the
+ * username, password and data source. At this point the user is incomplete and
+ * only exists as an instance in memory.
+ * 
+ * After creating an instance of the user the newUser() method is used to 
+ * initialize the user and save the user in the data source. Note that any
+ * user flag settings can be passed to the newUser() method when creating this
+ * user.
+ */
 // process create new user form if submitted
 if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 	// create a user object for this new user
-	$u = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
+	$newUser = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
 
 	// save as new user
-	$u->newUser((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
+	$result = $newUser->newUser((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
+	
+	// display a result message
+	if ($result) {
+		echo 'New user ' . $newUser->getUsername() . ' created.';
+	}
+	else {
+		echo 'Failed to create user ' . $newUser->getUsername() . '!';
+	}
 }
 ?>
 		
@@ -63,6 +89,9 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 		<br><br>
 		
 		
+		<!--
+		This form and block of code provide a simple demonstration of user password change.
+		-->
 		<div>Change user password</div>
 		<div>
 			<form method="post">
@@ -72,6 +101,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 					// get a list of all usernames for use in the following forms
 					$usernames = $dataSource->getUsernames();
 					
+					// display username options
 					if ($usernames) foreach ($usernames as $name) {
 						echo '<option value="' . $name . '">' . $name . "</option>\n";
 					}
@@ -83,35 +113,68 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 			</form>
 			
 <?php
+/**
+ * When changing a user's password there are two possible paths of action that
+ * can be followed. There is a simple password change where the new password is 
+ * passed to the changePassword() method, or there is the callback method that will
+ * execute a provided callback function to enable re-encryption of user data in
+ * an application.
+ * 
+ * 
+ */
 if (!empty($_POST['submit']) && $_POST['submit'] == 'change_password') {
 	// create a user object for this user, include the old password if provided
-	$u = new CryptUser($_POST['username'], (!empty($_POST['old_password']) ? $_POST['old_password'] : ''), $dataSource);
+	$theUser = new CryptUser($_POST['username'], (!empty($_POST['old_password']) ? $_POST['old_password'] : ''), $dataSource);
 
-	// if old password provided then change password with callback function
-	if (!empty($_POST['old_password'])) {
-		// call the password change function with a callback function name
-		$u->changePassword($_POST['password'], "encryptionCallback");
+	// if old password was not provided then do a simple password change
+	if (empty($_POST['old_password'])) {
+		// simple password change with no callback
+		$result = $theUser->changePassword($_POST['password']);
 	}
 	else {
-		// simple password change with no callback
-		$u->changePassword($_POST['password']);
+		// create an encrypted package using the user's key before the password change
+		$oldPackage = $theUser->encryptPackage('The quick brown fox.');
+		
+		// call the password change function with a callback function name
+		$result = $theUser->changePassword($_POST['password'], "encryptionCallback");
+		
+		// warn the user if the change password with callback fails
+		if ($result === FALSE) {
+			echo 'Password change with callback failed! Verify the old password is valid.';
+		}
 	}
 
-	// save the new user
-	$u->saveUser();
+	// save the new user if changing the password is successful
+	if ($result) $theUser->saveUser();
 }
 
 
-// encryption callback function used when password is changed and encrypted data must be re-encrypted with new key
+/**
+ * This is the example callback function for the password change with callback.
+ * 
+ * Note that the callback must accept two arguments, an old CryptUser object and
+ * a new CryptUser object. The old CryptUser can be used to access user data that
+ * was encrypted with the old password and key. Once decrypted the data can then 
+ * be resaved using the new CryptUser's key.
+ */
 function encryptionCallback($oldCryptUser, $newCryptUser) {
-	echo ($oldCryptUser->isAuthenticated() ? 'Yes' : 'No') . "<br>\n";
-	$old = $oldCryptUser->encryptPackage('The quick brown fox.');
-	echo 'en: ' . print_r($old, TRUE) . "<br>\n";
+	// using the $oldPackage that was created before the password change
+	global $oldPackage;
 	
-	echo ($newCryptUser->isAuthenticated() ? 'Yes' : 'No') . "<br>\n";
-	$oldd = $newCryptUser->decryptPackage($old['envelope'], $old['package']);
-	echo 'dc: ' . $oldd . "<br>\n";
+	// decrypt the old package
+	$decryptedPackage = $oldCryptUser->decryptPackage($oldPackage);
+	echo 'Old Package Decrypted: ' . $decryptedPackage . "<br>\n";
 	
+	// re-encrypt with the new user instance
+	$newPackage = $newCryptUser->encryptPackage($decryptedPackage);
+	if ($newPackage) {
+		echo 'Re-encryption successful.' . "<br>\n";
+		$decryptedPackage = $newCryptUser->decryptPackage($newPackage);
+		echo 'New Package Decrypted: ' . $decryptedPackage . "<br>\n";
+	}
+	else {
+		echo 'Re-encryption failed!' . "<br>\n";
+	}
 }
 
 ?>
@@ -173,7 +236,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 			<?php $encryptionPackage = $authenticatedUser->encryptPackage($inputString); ?>
 			Encryption Envelope: <span style="word-break: break-all;"><?php echo base64_encode($encryptionPackage['envelope']); ?></span> <br>
 			Encryption Package: <?php echo base64_encode($encryptionPackage['package']); ?> <br>
-			<?php $outputString = $authenticatedUser->decryptPackage($encryptionPackage['package'], $encryptionPackage['envelope']); ?>
+			<?php $outputString = $authenticatedUser->decryptPackage($encryptionPackage); ?>
 			Decrypted String: <?php echo $outputString; ?><br>
 			<?php } ?>
 <?php

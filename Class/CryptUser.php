@@ -256,8 +256,14 @@ class CryptUser {
 	 * @return boolean TRUE on success, FALSE on failure.
 	 */
 	public function changePassword($password, $callback = NULL) {
-		// if a callback is provided then clone this as the old user
-		if (!empty($callback)) $oldCryptUser = clone $this;
+		// if a callback is provided then prepare to use callback
+		if (!empty($callback)) {
+			// if this user is not authenticated then decryption will not be possible so we fail
+			if (!$this->isAuthenticated()) return FALSE;
+			
+			// create a clone of this user to be sent to callback
+			$oldCryptUser = clone $this;
+		}
 		
 		$this->password = $password;
 		$this->passwordHash = $this->hashPassword($password);
@@ -292,13 +298,12 @@ class CryptUser {
 	
 	/**
 	 * Decrypt the sealed package using the primary SSL key pair.
-	 * @param string $package The package to decrypt.
-	 * @param mixed $envelope The envelope for the package.
+	 * @param mixed $package An associative array containing 'package' and 'envelope'.
 	 * @return mixed The decrypted package or FALSE if there was an error.
 	 */
-	public function decryptPackage($package, $envelope) {
+	public function decryptPackage($package) {
 		if ($this->primaryKey) {
-			return $this->primaryKey->decryptPackage($package, $envelope);
+			return $this->primaryKey->decryptPackage($package['package'], $package['envelope']);
 		}
 		
 		return FALSE;
