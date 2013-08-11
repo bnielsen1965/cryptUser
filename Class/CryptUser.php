@@ -199,20 +199,27 @@ class CryptUser {
 	/**
 	 * Change the user's password and the other user elements that rely on the password.
 	 * @param string $password The new password to use.
+	 * @param string $callback Optional callback function used by the application for
+	 * post password change maintenance like re-encryption of data. The callback must
+	 * accept two CryptUser objects, the first object is the CryptUser with the new
+	 * password and encryption key, the second object is the Cryptuser with the old
+	 * password and encryption key.
 	 * @return boolean TRUE on success, FALSE on failure.
 	 */
-	public function changePassword($password) {
+	public function changePassword($password, $callback = NULL) {
+		// if a callback is provided then clone this as the old user
+		if (!empty($callback)) $oldCryptUser = clone $this;
+		
 		$this->password = $password;
 		$this->passwordHash = $this->hashPassword($password);
-		
-		// copy the old primary key to be used in downstream re-encryption calls
-		$oldPrimaryKey = $this->primaryKey;
 		
 		// set a new primary key
 		$this->setPrimaryKey();
 		
-		// handle downstream re-encryption here
+		// if a callback is provided then call now with the old and this new user
+		if (!empty($callback)) call_user_func($callback, $oldCryptUser, $this);
 		
+		// password change complete
 		return TRUE;
 	}
 	
