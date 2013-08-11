@@ -172,7 +172,7 @@ class SSLKey {
 	 * @return string The discovered pass phrase or NULL if not found.
 	 */
 	public static function parsePhrase($str) {
-		if (preg_match('/-----BEGIN PHRASE-----(.*)-----END PHRASE-----/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
+		if (preg_match('/(-----BEGIN PHRASE-----.*-----END PHRASE-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
 			return trim($ma[1][0]);
 		}
 
@@ -186,7 +186,7 @@ class SSLKey {
 	 * @return string The discovered certificate or NULL if not found.
 	 */
 	public static function parseCertificate($str) {
-		if (preg_match('/-----BEGIN CERTIFICATE-----(.*)-----END CERTIFICATE-----/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
+		if (preg_match('/(-----BEGIN CERTIFICATE-----.*-----END CERTIFICATE-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
 			return trim($ma[1][0]);
 		}
 
@@ -200,7 +200,7 @@ class SSLKey {
 	 * @return string The discovered private key or NULL if not found.
 	 */
 	public static function parsePrivateKey($str) {
-		if (preg_match('/-----BEGIN ENCRYPTED PRIVATE KEY-----(.*)-----END ENCRYPTED PRIVATE KEY-----/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
+		if (preg_match('/(-----BEGIN ENCRYPTED PRIVATE KEY-----.*-----END ENCRYPTED PRIVATE KEY-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
 			return trim($ma[1][0]);
 		}
 

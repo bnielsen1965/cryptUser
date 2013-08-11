@@ -82,12 +82,10 @@ class CryptUser {
 				
 				// if authenticated then build the user's primary key and set flags
 				if ($this->authenticated) {
-					$this->primaryKey = new SSLKey(
-							$this->password, 
-							SSLKey::parsePrivateKey($userData['sslKey']), 
-							SSLKey::parseCertificate($userData['sslKey'])
-					);
+					// set the user's primary SSL key
+					$this->setPrimaryKey(SSLKey::parsePrivateKey($userData['sslKey']), SSLKey::parseCertificate($userData['sslKey']));
 					
+					// set the user flags
 					$this->flags = $userData['flags'];
 				}
 				
@@ -111,6 +109,15 @@ class CryptUser {
 			'sslKey' => $this->primaryKey->getPrivateKey() . $this->primaryKey->getCertificate(),
 			'flags' => $this->flags
 		));
+	}
+	
+	
+	/**
+	 * Get the username string for this user.
+	 * @return string The username value.
+	 */
+	public function getUsername() {
+		return $this->username;
 	}
 	
 	
@@ -181,6 +188,15 @@ class CryptUser {
 	
 	
 	/**
+	 * Check if this user is authenticated.
+	 * @return boolean TRUE if authenticated, FALSE if not.
+	 */
+	public function isAuthenticated() {
+		return ($this->authenticated ? TRUE : FALSE);
+	}
+	
+	
+	/**
 	 * Change the user's password and the other user elements that rely on the password.
 	 * @param string $password The new password to use.
 	 * @return boolean TRUE on success, FALSE on failure.
@@ -210,7 +226,11 @@ class CryptUser {
 	 * @return array An array containing the envelope and encrypted package or NULL if an error occurs.
 	 */
 	public function encryptPackage($package) {
-		return $this->primaryKey->encryptPackage($package);
+		if ($this->primaryKey) {
+			return $this->primaryKey->encryptPackage($package);
+		}
+		
+		return FALSE;
 	}
 	
 	
@@ -221,7 +241,11 @@ class CryptUser {
 	 * @return mixed The decrypted package or FALSE if there was an error.
 	 */
 	public function decryptPackage($package, $envelope) {
-		return $this->primaryKey->decryptPackage($package, $envelope);
+		if ($this->primaryKey) {
+			return $this->primaryKey->decryptPackage($package, $envelope);
+		}
+		
+		return FALSE;
 	}
 
 

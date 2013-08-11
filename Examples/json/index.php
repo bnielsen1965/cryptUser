@@ -1,21 +1,28 @@
 		<?php
+		// using CryptUser class
 		include '../../Class/CryptUser.php';
 		
-		// JSON file path
-		$filePath = dirname(__FILE__) . '/users.json';
-
 		// using a JSON data source
 		include '../../Class/CryptJSONSource.php';
 		
+		// JSON file path for the data source
+		$filePath = dirname(__FILE__) . '/users.json';
+
 		// create the data source object
-		$ds = new CryptJSONSource($filePath);
+		$dataSource = new CryptJSONSource($filePath);
 		
+		// if form submitted then process the form
 		if (!empty($_POST['submit'])) {
+			// use the submit value to determine what action was requested
 			switch ($_POST['submit']) {
+				// create a user
 				case 'create':
 					if (!empty($_POST['username'])) {
 						// create a user object for this new user
-						$u = new CryptUser($_POST['username'], $_POST['password'], $ds);
+						$u = new CryptUser($_POST['username'], '', $dataSource);
+						
+						// change to the supplied password
+						$u->changePassword($_POST['password']);
 						
 						// create a new primary key for this user
 						$u->setPrimaryKey();
@@ -29,51 +36,60 @@
 					}
 					break;
 					
-					
+				// delete a user
 				case 'delete':
-					$ds->deleteUser($_POST['username']);
+					$dataSource->deleteUser($_POST['username']);
+					break;
+				
+				// authenticate a user
+				case 'authenticate':
+					$authenticatedUser = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
 					break;
 			}
 		}
 		?>
+<!doctype html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>cryptUser JSON Example</title>
     </head>
     <body>
-		<div>This crypUser example utilizes a JSON data source in the form of a text file named <i>users.json</i> in the example directory.</div>
+		<div>This cryptUser example utilizes a JSON data source in the form of a text file named <i>users.json</i> in the example directory.</div>
 		
 		<div>List of users:</div>
 		<?php
 		// get a list of all usernames
-		$usernames = $ds->getUsernames();
+		$usernames = $dataSource->getUsernames();
 		
 		if ($usernames === FALSE) {
 			echo '<div>No users found!</div>' . "\n";
 		}
 		else {
 			// display the list of users
-			echo "<ul>\n";
+			echo '<table border="1">' . "\n";
+			echo '<tr><th>Username</th><th>Active</th><th>Administrator</th></tr>' . "\n";
 			foreach ($usernames as $name) {
-				echo "<li><ul>\n";
-				echo '<li>Username: ' . $name . "</li>\n";
+				echo "<tr>\n";
+				echo '<td>' . $name . "</td>\n";
 				
 				// get this user's details
-				$user = $ds->getUserByName($name);
+				$user = $dataSource->getUserByName($name);
 				
 				// create a user object so we can use the functions
-				$u = new CryptUser($user['username'], '', $ds);
+				$u = new CryptUser($user['username'], '', $dataSource);
 				
 				// use the user object to determine flag settings
-				echo '<li>' . ($u->isActive() ? 'Active' : 'Not Active') . "</li>\n";
-				echo '<li>' . ($u->isAdmin() ? 'Administrator' : 'Not Administrator') . "</li>\n";
+				echo '<td>' . ($u->isActive() ? 'Yes' : 'No') . "</td>\n";
+				echo '<td>' . ($u->isAdmin() ? 'Yes' : 'No') . "</td>\n";
 				
-				echo "</ul></li>\n";
+				echo "</tr>\n";
 			}
-			echo "</ul>\n";
+			echo "</table>\n";
 		}
 		?>
+		
+		<br><br>
 		
 		<div>Create new user</div>
 		<div>
@@ -86,6 +102,9 @@
 		</div>
 		
 		<?php if ($usernames && count($usernames) > 0) { ?>
+		
+		<br><br>
+		
 		<div>Delete user</div>
 		<div>
 			<form method="post">
@@ -100,6 +119,33 @@
 			</form>
 		</div>
 		<?php } ?>
+		
+		<br><br>
+		
+		<div>Authenticate user</div>
+		<div>
+			<form method="post">
+				Username: <input type="text" name="username" /><br>
+				Password: <input type="text" name="password" /><br>
+
+				<button type="submit" name="submit" value="authenticate">Authenticate</button>
+			</form>
+			
+			<?php if (!empty($authenticatedUser)) { ?>
+			<br><br>
+			
+			Authenticated user tests...<br>
+			Username: <?php echo $authenticatedUser->getUsername(); ?><br>
+			Authenticated: <?php echo ($authenticatedUser->isAuthenticated() ? 'Yes' : 'No'); ?><br>
+			<?php $inputString = 'The quick brown fox.'; ?>
+			Input String: <?php echo $inputString; ?><br>
+			<?php $encryptionPackage = $authenticatedUser->encryptPackage($inputString); ?>
+			Encryption Envelope: <span style="word-break: break-all;"><?php echo base64_encode($encryptionPackage['envelope']); ?></span> <br>
+			Encryption Package: <?php echo base64_encode($encryptionPackage['package']); ?> <br>
+			<?php $outputString = $authenticatedUser->decryptPackage($encryptionPackage['package'], $encryptionPackage['envelope']); ?>
+			Decrypted String: <?php echo $outputString; ?><br>
+			<?php } ?>
+		</div>
 
     </body>
 </html>
