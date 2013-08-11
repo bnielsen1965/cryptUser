@@ -50,20 +50,10 @@ $dataSource = new CryptJSONSource($filePath);
 // process create new user form if submitted
 if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 	// create a user object for this new user
-	$u = new CryptUser($_POST['username'], '', $dataSource);
+	$u = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
 
-	// change to the supplied password
-	$u->changePassword($_POST['password']);
-
-	// create a new primary key for this user
-	$u->setPrimaryKey();
-
-	// set user flags as requested
-	if (!empty($_POST['active'])) $u->setACLFlags(CryptUser::ACL_ACTIVE_FLAG);
-	if (!empty($_POST['admin'])) $u->setACLFlags (CryptUser::ACL_ADMIN_FLAG);
-
-	// save the new user
-	$u->saveUser();
+	// save as new user
+	$u->newUser((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
 }
 ?>
 		

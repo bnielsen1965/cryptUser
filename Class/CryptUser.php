@@ -34,6 +34,7 @@ class CryptUser {
 	 */
 	const ACL_ADMIN_FLAG = 1;
 	const ACL_ACTIVE_FLAG = 2;
+	const ACL_ALL_FLAGS = 3; // OR all flags together
 	
 	
 	/**
@@ -68,29 +69,33 @@ class CryptUser {
 	 * @return boolean TRUE on success, FALSE on failure
 	 */
 	private function loadUser() {
-		if ($this->dataSource) {
-			$userData = $this->dataSource->getUserByName($this->username);
-			
-			if ($userData) {
-				// use data values for this user
-				$this->username = $userData['username'];
-				$this->passwordHash = $userData['passwordHash'];
+		// retrieve user's data from the data source
+		$userData = $this->dataSource->getUserByName($this->username);
+		
+		// if user data returned then process
+		if ($userData) {
+			// use data values for this user
+			$this->username = $userData['username'];
+			$this->passwordHash = $userData['passwordHash'];
+
+			// authenticate user by checking data source password hash with a hash of the provided password
+			if ($this->passwordHash == $this->hashPassword($this->password, $this->passwordHash)) {
+				// authentication passed
+				$this->authenticated = TRUE;
 				
-				// authenticate user by checking data source password hash with a hash of the provided password
-				if ($this->passwordHash == $this->hashPassword($this->password, $this->passwordHash)) $this->authenticated = TRUE;
-				else $this->authenticated = FALSE;
-				
-				// if authenticated then build the user's primary key and set flags
-				if ($this->authenticated) {
-					// set the user's primary SSL key
-					$this->setPrimaryKey(SSLKey::parsePrivateKey($userData['sslKey']), SSLKey::parseCertificate($userData['sslKey']));
-					
-					// set the user flags
-					$this->flags = $userData['flags'];
-				}
-				
-				return TRUE;
+				// set the user's primary SSL key
+				$this->setPrimaryKey(SSLKey::parsePrivateKey($userData['sslKey']), SSLKey::parseCertificate($userData['sslKey']));
+
+				// set the user flags
+				$this->flags = $userData['flags'];
 			}
+			else {
+				// authentication failed
+				$this->authenticated = FALSE;
+			}
+			
+			// load successful
+			return TRUE;
 		}
 		
 		// failed to load the user
@@ -109,6 +114,35 @@ class CryptUser {
 			'sslKey' => $this->primaryKey->getPrivateKey() . $this->primaryKey->getCertificate(),
 			'flags' => $this->flags
 		));
+	}
+	
+	
+	/**
+	 * Complete the steps the establish this as a new user in the data source.
+	 * @param integer $flags Optional ACL flags to apply to this new user.
+	 * @return boolean TRUE on success, FALSE on failure
+	 */
+	public function newUser($flags = NULL) {
+		// if user does not exist then create
+		if ($this->dataSource->getUserByName($this->username) === FALSE) {
+			// clear all ACL flags as a precaution
+			$this->clearAllACLFlags();
+
+			// if flags provided then set the flags
+			if (!is_null($flags)) $this->setACLFlags ($flags);
+
+			// use the change password function to set the password hash and create a primary key
+			$this->changePassword($this->password);
+
+			// save the new user
+			$this->saveUser();
+
+			return TRUE;
+		}
+		else {
+			// user already exists
+			return FALSE;
+		}
 	}
 	
 	
@@ -140,7 +174,6 @@ class CryptUser {
 	 */
 	public function setACLFlags($flagMask) {
 		$this->flags = $this->flags | $flagMask;
-		
 		return TRUE;
 	}
 
@@ -154,6 +187,22 @@ class CryptUser {
 		$this->flags = $this->flags & ~$flagMask;
 		
 		return TRUE;
+	}
+	
+	
+	/**
+	 * Set all possible ACL flags on this user.
+	 */
+	public function setAllACLFlags() {
+		$this->flags = CryptUser::ACL_ALL_FLAGS;
+	}
+	
+	
+	/**
+	 * Clear all possible ACL flags on this user.
+	 */
+	public function clearAllACLFlags() {
+		$this->flags = 0;
 	}
 
 	
