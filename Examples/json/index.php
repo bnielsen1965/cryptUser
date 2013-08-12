@@ -43,17 +43,11 @@ $dataSource = new CryptJSONSource($filePath);
 		
 		
 		<!--
+		create user block
 		This form and block of code provide a simple demonstration of user creation.
 		-->
 		<div>Create new user</div>
 		<div>
-			<form method="post">
-				Username: <input type="text" name="username" /><br>
-				Password: <input type="text" name="password" /><br>
-				<input type="checkbox" name="active" value="1" /> Active &nbsp;&nbsp;<input type="checkbox" name="admin" value="1" /> Administrator<br>
-				<button type="submit" name="submit" value="create">Create</button>
-			</form>
-			
 <?php
 /**
  * When the create user form is submitted a user instance is created using the
@@ -82,18 +76,34 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 	}
 }
 ?>
-		
+			<form method="post">
+				Username: <input type="text" name="username" /><br>
+				Password: <input type="text" name="password" /><br>
+				<input type="checkbox" name="active" value="1" /> Active &nbsp;&nbsp;<input type="checkbox" name="admin" value="1" /> Administrator<br>
+				<button type="submit" name="submit" value="create">Create</button>
+			</form>
 		</div>
+		<!-- end of create user block -->
 				
 		
 		<br><br>
 		
 		
 		<!--
-		This form and block of code provide a simple demonstration of user password change.
+		delete user block
+		This form and block of code provide a simple demonstration of listing users
+		and the delete user process.
 		-->
-		<div>Change user password</div>
+		<div>Delete user</div>
 		<div>
+<?php
+/**
+ * Deleting a user only requires removal from the data source.
+ */
+if (!empty($_POST['submit']) && $_POST['submit'] == 'delete') {
+	$dataSource->deleteUser($_POST['username']);
+}
+?>
 			<form method="post">
 				<select name="username">
 					<option value="">Select Username</option>
@@ -101,17 +111,27 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 					// get a list of all usernames for use in the following forms
 					$usernames = $dataSource->getUsernames();
 					
-					// display username options
+					// if we have usernames then list options
 					if ($usernames) foreach ($usernames as $name) {
 						echo '<option value="' . $name . '">' . $name . "</option>\n";
 					}
 					?>
-				</select><br>
-				New Password: <input type="text" name="password" /><br>
-				Old Password: <input type="text" name="old_password" /> (required when using callback for re-encryption process)<br>
-				<button type="submit" name="submit" value="change_password">Change Password</button>
+				</select>
+				<button type="submit" name="submit" value="delete">Delete</button>
 			</form>
-			
+		</div>
+		<!-- end delete user block -->
+		
+		
+		<br><br>
+		
+		
+		<!--
+		change password block
+		This form and block of code provide a simple demonstration of user password change.
+		-->
+		<div>Change user password</div>
+		<div>
 <?php
 /**
  * When changing a user's password there are two possible paths of action that
@@ -120,7 +140,18 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
  * execute a provided callback function to enable re-encryption of user data in
  * an application.
  * 
+ * Changing the user's password also requires a new primary encryption key because 
+ * the user's password is also the pass phrase for the key. Any user information 
+ * that has been encrypted with their key will need to be re-encrypted with the
+ * new key after the password is changed.
  * 
+ * The callback argument provides the hook for the re-encryption capability by 
+ * passing both the old user instance and the new user instance
+ * to your applications callback function where you would decrypt user data with the
+ * old key and then re-encrypt it with the new key.
+ * 
+ * If no re-encryption is required then the password function can be called with
+ * the new password and no callback.
  */
 if (!empty($_POST['submit']) && $_POST['submit'] == 'change_password') {
 	// create a user object for this user, include the old password if provided
@@ -132,7 +163,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_password') {
 		$result = $theUser->changePassword($_POST['password']);
 	}
 	else {
-		// create an encrypted package using the user's key before the password change
+		// for testing purposes, create an encrypted package using the user's key before the password change
 		$oldPackage = $theUser->encryptPackage('The quick brown fox.');
 		
 		// call the password change function with a callback function name
@@ -140,6 +171,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_password') {
 		
 		// warn the user if the change password with callback fails
 		if ($result === FALSE) {
+			// the old password must be valid to generate the old primary key
 			echo 'Password change with callback failed! Verify the old password is valid.';
 		}
 	}
@@ -161,14 +193,18 @@ function encryptionCallback($oldCryptUser, $newCryptUser) {
 	// using the $oldPackage that was created before the password change
 	global $oldPackage;
 	
-	// decrypt the old package
+	// decrypt the old package using the old user instance
 	$decryptedPackage = $oldCryptUser->decryptPackage($oldPackage);
 	echo 'Old Package Decrypted: ' . $decryptedPackage . "<br>\n";
 	
 	// re-encrypt with the new user instance
 	$newPackage = $newCryptUser->encryptPackage($decryptedPackage);
-	if ($newPackage) {
+	
+	// if the decryption and re-encryption passed
+	if ($decryptedPackage && $newPackage) {
 		echo 'Re-encryption successful.' . "<br>\n";
+		
+		// just to verify all is good we decrypt the new package with the new user
 		$decryptedPackage = $newCryptUser->decryptPackage($newPackage);
 		echo 'New Package Decrypted: ' . $decryptedPackage . "<br>\n";
 	}
@@ -176,17 +212,7 @@ function encryptionCallback($oldCryptUser, $newCryptUser) {
 		echo 'Re-encryption failed!' . "<br>\n";
 	}
 }
-
 ?>
-		
-		</div>
-		
-		
-		<br><br>
-		
-		
-		<div>Delete user</div>
-		<div>
 			<form method="post">
 				<select name="username">
 					<option value="">Select Username</option>
@@ -194,25 +220,28 @@ function encryptionCallback($oldCryptUser, $newCryptUser) {
 					// get a list of all usernames for use in the following forms
 					$usernames = $dataSource->getUsernames();
 					
+					// display username options
 					if ($usernames) foreach ($usernames as $name) {
 						echo '<option value="' . $name . '">' . $name . "</option>\n";
 					}
 					?>
-				</select>
-				<button type="submit" name="submit" value="delete">Delete</button>
+				</select><br>
+				New Password: <input type="text" name="password" /><br>
+				Old Password: <input type="text" name="old_password" /> (required when using callback for re-encryption process)<br>
+				<button type="submit" name="submit" value="change_password">Change Password</button>
 			</form>
-<?php
-if (!empty($_POST['submit']) && $_POST['submit'] == 'delete') {
-	$dataSource->deleteUser($_POST['username']);
-}
-?>
-		
 		</div>
+		<!-- end of change password block -->
 		
 		
 		<br><br>
 		
 		
+		<!--
+		authenticate user block
+		This form and block of code demonstrates user authentication checks and
+		the encryption process.
+		-->
 		<div>Authenticate user</div>
 		<div>
 			<form method="post">
@@ -222,6 +251,17 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'delete') {
 				<button type="submit" name="submit" value="authenticate">Authenticate</button>
 			</form>
 <?php
+/**
+ * Authenticating a user requires the creation of a user instance based on the 
+ * username, password and data source follow by a check of the isAuthenticated() method.
+ * 
+ * When the user object is created the provided password will be checked against the
+ * data source to determine if the user authentication passes and the user's encryption
+ * key will be established at the same time.
+ * 
+ * As long as the authentication is successful the encryption and decryption functions
+ * in the user instance can be utilized.
+ */
 if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 	$authenticatedUser = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
 	
@@ -243,23 +283,28 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 }
 ?>
 		</div>
+		<!-- end of authenticate user block -->
 		
 		
 		<br><br>
 		
 		
+		<!--
+		list users block
+		This section demonstrates some of the functions to list users and some
+		user details.
+		-->
 		<div>List of users:</div>
 		<?php
 		// get a list of all usernames for use in the following forms
 		$usernames = $dataSource->getUsernames();
 					
-		if ($usernames === FALSE) {
-			echo '<div>No users found!</div>' . "\n";
-		}
-		else {
+		if ($usernames) {
 			// display the list of users
 			echo '<table border="1">' . "\n";
 			echo '<tr><th>Username</th><th>Active</th><th>Administrator</th></tr>' . "\n";
+			
+			// loop through all the names
 			foreach ($usernames as $name) {
 				echo "<tr>\n";
 				echo '<td>' . $name . "</td>\n";
@@ -278,6 +323,11 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 			}
 			echo "</table>\n";
 		}
+		else {
+			// no users in the list
+			echo '<div>No users found!</div>' . "\n";
+		}
+
 		?>
 
     </body>
