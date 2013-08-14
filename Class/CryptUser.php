@@ -292,7 +292,16 @@ class CryptUser {
 	 */
 	public function encryptPackage($package) {
 		if ($this->primaryKey) {
-			return $this->primaryKey->encryptPackage($package);
+			// encrypt the package
+			$encryptedPackage = $this->primaryKey->encryptPackage($package);
+			
+			if ($encryptedPackage) {
+				// use base 64 encoding to make strings safe for various storage mechanisms
+				$encryptedPackage['envelope'] = base64_encode($encryptedPackage['envelope']);
+				$encryptedPackage['package'] = base64_encode($encryptedPackage['package']);
+				
+				return $encryptedPackage;
+			}
 		}
 		
 		return FALSE;
@@ -306,7 +315,7 @@ class CryptUser {
 	 */
 	public function decryptPackage($package) {
 		if ($this->primaryKey) {
-			return $this->primaryKey->decryptPackage($package['package'], $package['envelope']);
+			return $this->primaryKey->decryptPackage(base64_decode($package['package']), base64_decode($package['envelope']));
 		}
 		
 		return FALSE;
