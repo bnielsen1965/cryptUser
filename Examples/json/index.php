@@ -33,20 +33,25 @@ $dataSource = new CryptJSONSource($filePath);
 			
 			<p>
 				The example code is structured with each form providing a common function
-				that would exist in an application with the associated PHP code following the
-				form so you can see how to implement the function in your application.
+				that would exist in an application with the associated PHP code included with
+				the form so you can see how to implement the function in your application.
+			</p>
+			
+			<p>
+				NOTE: The example code does not provide user input validation! You must add
+				input validation as needed for your application.
 			</p>
 		</div>
 		
 		
-		<br><br>
+		<br>
 		
 		
 		<!--
 		create user block
 		This form and block of code provide a simple demonstration of user creation.
 		-->
-		<div>Create new user</div>
+		<h3>Create new user</h3>
 		<div>
 <?php
 /**
@@ -63,9 +68,12 @@ $dataSource = new CryptJSONSource($filePath);
 if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 	// create a user object for this new user
 	$newUser = new CryptUser($_POST['username'], $_POST['password'], $dataSource);
+	
+	// set the user flags
+	$newUser->setACLFlags((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
 
 	// save as new user
-	$result = $newUser->newUser((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
+	$result = $newUser->newUser();//(!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
 	
 	// display a result message
 	if ($result) {
@@ -94,7 +102,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'create') {
 		This form and block of code provide a simple demonstration of listing users
 		and the delete user process.
 		-->
-		<div>Delete user</div>
+		<h3>Delete user</h3>
 		<div>
 <?php
 /**
@@ -130,7 +138,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'delete') {
 		change password block
 		This form and block of code provide a simple demonstration of user password change.
 		-->
-		<div>Change user password</div>
+		<h3>Change user password</h3>
 		<div>
 <?php
 /**
@@ -238,11 +246,62 @@ function encryptionCallback($oldCryptUser, $newCryptUser) {
 		
 		
 		<!--
+		change user flags block
+		This form and block of code provide a simple demonstration of user flags change.
+		-->
+		<h3>Change user flags</h3>
+		<div>
+<?php
+/**
+ * When modifying a user's flag settings it as simple as creating a CryptUser instance
+ * for the user, changing the flag settings, and finally saving the modified user.
+ */
+// process create new user form if submitted
+if (!empty($_POST['submit']) && $_POST['submit'] == 'change_flags') {
+	// create a user object for this new user without the user's password
+	$newUser = new CryptUser($_POST['username'], '', $dataSource);
+
+	// clear old flag settings
+	$newUser->clearAllACLFlags();
+	
+	// set the new flags settings
+	$newUser->setACLFlags((!empty($_POST['active']) ? CryptUser::ACL_ACTIVE_FLAG : 0) | (!empty($_POST['admin']) ? CryptUser::ACL_ADMIN_FLAG : 0));
+	
+	// save the user
+	$newUser->saveUser();
+
+	echo 'User settings saved.';
+}
+?>
+			<form method="post">
+				<select name="username">
+					<option value="">Select Username</option>
+					<?php
+					// get a list of all usernames for use in the following forms
+					$usernames = $dataSource->getUsernames();
+					
+					// display username options
+					if ($usernames) foreach ($usernames as $name) {
+						echo '<option value="' . $name . '">' . $name . "</option>\n";
+					}
+					?>
+				</select><br>
+				<input type="checkbox" name="active" value="1" /> Active &nbsp;&nbsp;<input type="checkbox" name="admin" value="1" /> Administrator<br>
+				<button type="submit" name="submit" value="change_flags">Change Flags</button>
+			</form>
+		</div>
+		<!-- end of change flags block -->
+		
+		
+		<br><br>
+		
+		
+		<!--
 		authenticate user block
 		This form and block of code demonstrates user authentication checks and
 		the encryption process.
 		-->
-		<div>Authenticate user</div>
+		<h3>Authenticate user</h3>
 		<div>
 			<form method="post">
 				Username: <input type="text" name="username" /><br>
@@ -294,7 +353,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 		This section demonstrates some of the functions to list users and some
 		user details.
 		-->
-		<div>List of users:</div>
+		<h3>List of users</h3>
 		<?php
 		// get a list of all usernames for use in the following forms
 		$usernames = $dataSource->getUsernames();

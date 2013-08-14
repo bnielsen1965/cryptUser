@@ -61,6 +61,13 @@ interface CryptDataSource {
 	 */
 	public function saveUser($user);
 	
+	/**
+	 * Delete the specified user from the data source.
+	 * @param string $username The username of the user to delete.
+	 * @return boolean Returns TRUE on success and FALSE on failure.
+	 */
+	public function deleteUser($username);
+
 }
 
 ?>

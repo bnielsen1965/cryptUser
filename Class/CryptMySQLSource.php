@@ -23,9 +23,10 @@
 require_once 'CryptDataSource.php';
 
 /**
- * Description of CryptMySQLSource
+ * A MySQL based data source object.
  *
- * @author burnin
+ * @author Bryan Nielsen, bnielsen1965@gmail.com
+ * @copyright Copyright 2013, Bryan Nielsen
  */
 class CryptMySQLSource implements CryptDataSource {
 	private $mysqli;
@@ -83,6 +84,26 @@ class CryptMySQLSource implements CryptDataSource {
 	
 	
 	/**
+	 * Get a list of usernames
+	 * @return array An array of strings containing the usernames from the data source.
+	 */
+	public function getUsernames() {
+		$sql = "SELECT * FROM " . $this->usersTable;
+		$rs = $this->mysqli->query($sql);
+		if ($rs && $rs->num_rows) {
+			$usernames = array();
+			while ($row = $rs->fetch_assoc()) {
+				$usernames[] = $row['username'];
+			}
+			return $usernames;
+		}
+		
+		// failed to find user
+		return FALSE;
+	}
+	
+	
+	/**
 	 * Save the provided user details in the data source.
 	 * @param array $user An array of user elements to be saved.
 	 * @return boolean Returns TRUE on success and FALSE on failure.
@@ -106,6 +127,17 @@ class CryptMySQLSource implements CryptDataSource {
 				")";
 		}
 		
+		return $this->mysqli->query($sql);
+	}
+	
+	
+	/**
+	 * Delete the specified user from the data source.
+	 * @param string $username The username of the user to delete.
+	 * @return boolean Returns TRUE on success and FALSE on failure.
+	 */
+	public function deleteUser($username) {
+		$sql = "DELETE FROM " . $this->usersTable . " WHERE username='" . $this->mysqli->real_escape_string($username) . "'";
 		return $this->mysqli->query($sql);
 	}
 	

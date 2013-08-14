@@ -42,12 +42,12 @@ class CryptUser {
 	 */
 	private $username;
 	private $password;
-	private $passwordHash;
-	private $authenticated;
-	private $primaryKey;
-	private $flags;
+	private $passwordHash; // hashed password
+	private $authenticated; // user authenticated flag
+	private $primaryKey; // SSLKey instance
+	private $sslKey; // PEM formatted private key and certificate
+	private $flags; // user flag settings
 	private $dataSource;
-	private $keyRing;
 	
 	
 	/**
@@ -60,6 +60,9 @@ class CryptUser {
 		$this->username = $username;
 		$this->password = $password;
 		$this->dataSource = $dataSource;
+		$this->clearAllACLFlags();
+		$this->sslKey = '';
+
 		if (!empty($this->dataSource)) $this->loadUser();
 	}
 	
@@ -77,6 +80,8 @@ class CryptUser {
 			// use data values for this user
 			$this->username = $userData['username'];
 			$this->passwordHash = $userData['passwordHash'];
+			$this->flags = $userData['flags'];
+			$this->sslKey = $userData['sslKey'];
 
 			// authenticate user by checking data source password hash with a hash of the provided password
 			if ($this->passwordHash == $this->hashPassword($this->password, $this->passwordHash)) {
@@ -84,10 +89,7 @@ class CryptUser {
 				$this->authenticated = TRUE;
 				
 				// set the user's primary SSL key
-				$this->setPrimaryKey(SSLKey::parsePrivateKey($userData['sslKey']), SSLKey::parseCertificate($userData['sslKey']));
-
-				// set the user flags
-				$this->flags = $userData['flags'];
+				$this->setPrimaryKey(SSLKey::parsePrivateKey($this->sslKey), SSLKey::parseCertificate($this->sslKey));
 			}
 			else {
 				// authentication failed
@@ -111,26 +113,19 @@ class CryptUser {
 		return $this->dataSource->saveUser(array(
 			'username' => $this->username,
 			'passwordHash' => $this->passwordHash,
-			'sslKey' => $this->primaryKey->getPrivateKey() . $this->primaryKey->getCertificate(),
+			'sslKey' => $this->sslKey,
 			'flags' => $this->flags
 		));
 	}
 	
 	
 	/**
-	 * Complete the steps the establish this as a new user in the data source.
-	 * @param integer $flags Optional ACL flags to apply to this new user.
+	 * Complete the steps to establish this as a new user in the data source.
 	 * @return boolean TRUE on success, FALSE on failure
 	 */
-	public function newUser($flags = NULL) {
+	public function newUser() {
 		// if user does not exist then create
 		if ($this->dataSource->getUserByName($this->username) === FALSE) {
-			// clear all ACL flags as a precaution
-			$this->clearAllACLFlags();
-
-			// if flags provided then set the flags
-			if (!is_null($flags)) $this->setACLFlags ($flags);
-
 			// use the change password function to set the password hash and create a primary key
 			$this->changePassword($this->password);
 
@@ -162,7 +157,12 @@ class CryptUser {
 	 * @return boolean TRUE on success, FALSE on failure.
 	 */
 	public function setPrimaryKey($key = NULL, $certificate = NULL) {
+		// create primary key
 		$this->primaryKey = new SSLKey($this->password, $key, $certificate);
+		
+		// if the provided key or certificate were empty then use the new values from the new primary key
+		if (empty($key) || empty($certificate)) $this->sslKey = $this->primaryKey->getPrivateKey() . $this->primaryKey->getCertificate();
+		
 		return TRUE;
 	}
 	
@@ -246,7 +246,7 @@ class CryptUser {
 	
 	
 	/**
-	 * Change the user's password and the other user elements that rely on the password.
+	 * Change the user's password and the SSL Key elements that rely on the password.
 	 * @param string $password The new password to use.
 	 * @param string $callback Optional callback function used by the application for
 	 * post password change maintenance like re-encryption of data. The callback must
@@ -270,6 +270,9 @@ class CryptUser {
 		
 		// set a new primary key
 		$this->setPrimaryKey();
+		
+		// set the sslKey value using the new primary key
+		$this->sslKey = $this->primaryKey->getPrivateKey() . $this->primaryKey->getCertificate();
 		
 		// if a callback is provided then call now with the old and this new user
 		if (!empty($callback)) call_user_func($callback, $oldCryptUser, $this);
