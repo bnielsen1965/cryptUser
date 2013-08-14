@@ -8,7 +8,7 @@
 	<title>File Class/CryptDataSource.php | cryptUser</title>
 
 	<script type="text/javascript" src="resources/combined.js?368157054"></script>
-	<script type="text/javascript" src="elementlist.js?359993623"></script>
+	<script type="text/javascript" src="elementlist.js?730208175"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -30,9 +30,7 @@
 				<li><a href="class-CryptJSONSource.html">CryptJSONSource</a></li>
 				<li><a href="class-CryptMySQLSource.html">CryptMySQLSource</a></li>
 				<li><a href="class-CryptUser.html">CryptUser</a></li>
-				<li><a href="class-CryptUserTest.html">CryptUserTest</a></li>
 				<li><a href="class-SSLKey.html">SSLKey</a></li>
-				<li><a href="class-SSLKeyTest.html">SSLKeyTest</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -127,16 +125,29 @@
 </span><span id="49" class="l"><a class="l" href="#49">49: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getUserByName" href="#_getUserByName">getUserByName</a>(<span class="php-var">$username</span>);
 </span><span id="50" class="l"><a class="l" href="#50">50: </a>    
 </span><span id="51" class="l"><a class="l" href="#51">51: </a>    <span class="php-comment">/**
-</span></span><span id="52" class="l"><a class="l" href="#52">52: </a><span class="php-comment">     * Save the provided user details in the data source.
-</span></span><span id="53" class="l"><a class="l" href="#53">53: </a><span class="php-comment">     * @param array $user An array of user elements to be saved.
-</span></span><span id="54" class="l"><a class="l" href="#54">54: </a><span class="php-comment">     * @return boolean Returns TRUE on success and FALSE on failure.
-</span></span><span id="55" class="l"><a class="l" href="#55">55: </a><span class="php-comment">     */</span>
-</span><span id="56" class="l"><a class="l" href="#56">56: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_saveUser" href="#_saveUser">saveUser</a>(<span class="php-var">$user</span>);
-</span><span id="57" class="l"><a class="l" href="#57">57: </a>    
-</span><span id="58" class="l"><a class="l" href="#58">58: </a>}
-</span><span id="59" class="l"><a class="l" href="#59">59: </a>
-</span><span id="60" class="l"><a class="l" href="#60">60: </a><span class="xlang">?&gt;</span>
-</span><span id="61" class="l"><a class="l" href="#61">61: </a></span></code></pre>
+</span></span><span id="52" class="l"><a class="l" href="#52">52: </a><span class="php-comment">     * Get a list of usernames 
+</span></span><span id="53" class="l"><a class="l" href="#53">53: </a><span class="php-comment">     * @return array An array of strings containing the usernames from the data source.
+</span></span><span id="54" class="l"><a class="l" href="#54">54: </a><span class="php-comment">     */</span>
+</span><span id="55" class="l"><a class="l" href="#55">55: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getUsernames" href="#_getUsernames">getUsernames</a>();
+</span><span id="56" class="l"><a class="l" href="#56">56: </a>    
+</span><span id="57" class="l"><a class="l" href="#57">57: </a>    <span class="php-comment">/**
+</span></span><span id="58" class="l"><a class="l" href="#58">58: </a><span class="php-comment">     * Save the provided user details in the data source.
+</span></span><span id="59" class="l"><a class="l" href="#59">59: </a><span class="php-comment">     * @param array $user An array of user elements to be saved.
+</span></span><span id="60" class="l"><a class="l" href="#60">60: </a><span class="php-comment">     * @return boolean Returns TRUE on success and FALSE on failure.
+</span></span><span id="61" class="l"><a class="l" href="#61">61: </a><span class="php-comment">     */</span>
+</span><span id="62" class="l"><a class="l" href="#62">62: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_saveUser" href="#_saveUser">saveUser</a>(<span class="php-var">$user</span>);
+</span><span id="63" class="l"><a class="l" href="#63">63: </a>    
+</span><span id="64" class="l"><a class="l" href="#64">64: </a>    <span class="php-comment">/**
+</span></span><span id="65" class="l"><a class="l" href="#65">65: </a><span class="php-comment">     * Delete the specified user from the data source.
+</span></span><span id="66" class="l"><a class="l" href="#66">66: </a><span class="php-comment">     * @param string $username The username of the user to delete.
+</span></span><span id="67" class="l"><a class="l" href="#67">67: </a><span class="php-comment">     * @return boolean Returns TRUE on success and FALSE on failure.
+</span></span><span id="68" class="l"><a class="l" href="#68">68: </a><span class="php-comment">     */</span>
+</span><span id="69" class="l"><a class="l" href="#69">69: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_deleteUser" href="#_deleteUser">deleteUser</a>(<span class="php-var">$username</span>);
+</span><span id="70" class="l"><a class="l" href="#70">70: </a>
+</span><span id="71" class="l"><a class="l" href="#71">71: </a>}
+</span><span id="72" class="l"><a class="l" href="#72">72: </a>
+</span><span id="73" class="l"><a class="l" href="#73">73: </a><span class="xlang">?&gt;</span>
+</span><span id="74" class="l"><a class="l" href="#74">74: </a></span></code></pre>
 
 	<div id="footer">
 		cryptUser API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

@@ -7,7 +7,7 @@
 	<title>Class CryptJSONSource | cryptUser</title>
 
 	<script type="text/javascript" src="resources/combined.js?368157054"></script>
-	<script type="text/javascript" src="elementlist.js?359993623"></script>
+	<script type="text/javascript" src="elementlist.js?730208175"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,9 +29,7 @@
 				<li class="active"><a href="class-CryptJSONSource.html">CryptJSONSource</a></li>
 				<li><a href="class-CryptMySQLSource.html">CryptMySQLSource</a></li>
 				<li><a href="class-CryptUser.html">CryptUser</a></li>
-				<li><a href="class-CryptUserTest.html">CryptUserTest</a></li>
 				<li><a href="class-SSLKey.html">SSLKey</a></li>
-				<li><a href="class-SSLKeyTest.html">SSLKeyTest</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -80,7 +78,7 @@
 
 	<div class="description">
 	
-<p>A JSON file based data source object.</p>
+<p>A JSON file based data source object for the CryptUsers.</p>
 
 	</div>
 
@@ -112,7 +110,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-239" title="Go to source code">Class/CryptJSONSource.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-288" title="Go to source code">Class/CryptJSONSource.php</a><br />
 	</div>
 
 
@@ -236,6 +234,45 @@ found.<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getUsernames" id="_getUsernames">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUsernames">#</a>
+		<code><a href="source-class-CryptJSONSource.html#84-102" title="Go to source code">getUsernames</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get a list of usernames</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a list of usernames</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array of strings containing the usernames from the data source.<br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-CryptDataSource.html#_getUsernames">CryptDataSource::getUsernames()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="saveUser" id="_saveUser">
 
 		<td class="attributes"><code>
@@ -247,7 +284,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveUser">#</a>
-		<code><a href="source-class-CryptJSONSource.html#84-105" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#105-126" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
 
 		<div class="description short">
 			
@@ -280,6 +317,50 @@ found.<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="deleteUser" id="_deleteUser">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteUser">#</a>
+		<code><a href="source-class-CryptJSONSource.html#129-152" title="Go to source code">deleteUser</a>( <span>string <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Delete the specified user from the data source.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Delete the specified user from the data source.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>$username The username of the user to delete.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE on success and FALSE on failure.<br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-CryptDataSource.html#_deleteUser">CryptDataSource::deleteUser()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="lockFile" id="_lockFile">
 
 		<td class="attributes"><code>
@@ -291,7 +372,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#126-163" title="Go to source code">lockFile</a>( <span>filename <var>$filename</var></span>, <span>mode <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#175-212" title="Go to source code">lockFile</a>( <span>filename <var>$filename</var></span>, <span>mode <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -335,7 +416,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedRead">#</a>
-		<code><a href="source-class-CryptJSONSource.html#166-195" title="Go to source code">lockedRead</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#215-244" title="Go to source code">lockedRead</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -379,7 +460,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedWrite">#</a>
-		<code><a href="source-class-CryptJSONSource.html#198-227" title="Go to source code">lockedWrite</a>( <span>message <var>$filename</var></span>, <span>mixed <var>$buffer</var></span>, <span>mixed <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#247-276" title="Go to source code">lockedWrite</a>( <span>message <var>$filename</var></span>, <span>mixed <var>$buffer</var></span>, <span>mixed <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -425,7 +506,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrors">#</a>
-		<code><a href="source-class-CryptJSONSource.html#230-237" title="Go to source code">getErrors</a>( )</code>
+		<code><a href="source-class-CryptJSONSource.html#279-286" title="Go to source code">getErrors</a>( )</code>
 
 		<div class="description short">
 			

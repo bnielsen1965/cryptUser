@@ -7,7 +7,7 @@
 	<title>Class CryptUser | cryptUser</title>
 
 	<script type="text/javascript" src="resources/combined.js?368157054"></script>
-	<script type="text/javascript" src="elementlist.js?359993623"></script>
+	<script type="text/javascript" src="elementlist.js?730208175"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -29,9 +29,7 @@
 				<li><a href="class-CryptJSONSource.html">CryptJSONSource</a></li>
 				<li><a href="class-CryptMySQLSource.html">CryptMySQLSource</a></li>
 				<li class="active"><a href="class-CryptUser.html">CryptUser</a></li>
-				<li><a href="class-CryptUserTest.html">CryptUserTest</a></li>
 				<li><a href="class-SSLKey.html">SSLKey</a></li>
-				<li><a href="class-SSLKeyTest.html">SSLKeyTest</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -80,7 +78,7 @@
 
 	<div class="description">
 	
-<p>User object.</p>
+<p>CryptUser object.</p>
 
 	</div>
 
@@ -103,7 +101,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptUser.html#25-261" title="Go to source code">Class/CryptUser.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptUser.html#25-349" title="Go to source code">Class/CryptUser.php</a><br />
 	</div>
 
 
@@ -121,7 +119,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-CryptUser.html#52-63" title="Go to source code">__construct</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$dataSource</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-CryptUser.html#53-67" title="Go to source code">__construct</a>( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$dataSource</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -163,7 +161,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveUser">#</a>
-		<code><a href="source-class-CryptUser.html#103-114" title="Go to source code">saveUser</a>( )</code>
+		<code><a href="source-class-CryptUser.html#108-119" title="Go to source code">saveUser</a>( )</code>
 
 		<div class="description short">
 			
@@ -189,6 +187,80 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="newUser" id="_newUser">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_newUser">#</a>
+		<code><a href="source-class-CryptUser.html#122-141" title="Go to source code">newUser</a>( )</code>
+
+		<div class="description short">
+			
+<p>Complete the steps to establish this as a new user in the data source.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Complete the steps to establish this as a new user in the data source.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUsername" id="_getUsername">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUsername">#</a>
+		<code><a href="source-class-CryptUser.html#144-150" title="Go to source code">getUsername</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the username string for this user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the username string for this user.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The username value.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="setPrimaryKey" id="_setPrimaryKey">
 
 		<td class="attributes"><code>
@@ -200,7 +272,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setPrimaryKey">#</a>
-		<code><a href="source-class-CryptUser.html#117-126" title="Go to source code">setPrimaryKey</a>( <span>string <var>$key</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$certificate</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-CryptUser.html#153-167" title="Go to source code">setPrimaryKey</a>( <span>string <var>$key</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$certificate</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -244,7 +316,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setACLFlags">#</a>
-		<code><a href="source-class-CryptUser.html#129-138" title="Go to source code">setACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#170-178" title="Go to source code">setACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
 
 		<div class="description short">
 			
@@ -286,7 +358,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clearACLFlags">#</a>
-		<code><a href="source-class-CryptUser.html#141-150" title="Go to source code">clearACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#181-190" title="Go to source code">clearACLFlags</a>( <span>integer <var>$flagMask</var></span> )</code>
 
 		<div class="description short">
 			
@@ -317,6 +389,72 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="setAllACLFlags" id="_setAllACLFlags">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAllACLFlags">#</a>
+		<code><a href="source-class-CryptUser.html#193-198" title="Go to source code">setAllACLFlags</a>( )</code>
+
+		<div class="description short">
+			
+<p>Set all possible ACL flags on this user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set all possible ACL flags on this user.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clearAllACLFlags" id="_clearAllACLFlags">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clearAllACLFlags">#</a>
+		<code><a href="source-class-CryptUser.html#201-206" title="Go to source code">clearAllACLFlags</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear all possible ACL flags on this user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear all possible ACL flags on this user.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="isACLFlagSet" id="_isACLFlagSet">
 
 		<td class="attributes"><code>
@@ -328,7 +466,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isACLFlagSet">#</a>
-		<code><a href="source-class-CryptUser.html#153-160" title="Go to source code">isACLFlagSet</a>( <span>integer <var>$flagMask</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#209-216" title="Go to source code">isACLFlagSet</a>( <span>integer <var>$flagMask</var></span> )</code>
 
 		<div class="description short">
 			
@@ -372,7 +510,7 @@ argument.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isAdmin">#</a>
-		<code><a href="source-class-CryptUser.html#163-170" title="Go to source code">isAdmin</a>( )</code>
+		<code><a href="source-class-CryptUser.html#219-226" title="Go to source code">isAdmin</a>( )</code>
 
 		<div class="description short">
 			
@@ -409,7 +547,7 @@ argument.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isActive">#</a>
-		<code><a href="source-class-CryptUser.html#173-180" title="Go to source code">isActive</a>( )</code>
+		<code><a href="source-class-CryptUser.html#229-236" title="Go to source code">isActive</a>( )</code>
 
 		<div class="description short">
 			
@@ -435,6 +573,43 @@ argument.</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="isAuthenticated" id="_isAuthenticated">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAuthenticated">#</a>
+		<code><a href="source-class-CryptUser.html#239-245" title="Go to source code">isAuthenticated</a>( )</code>
+
+		<div class="description short">
+			
+<p>Check if this user is authenticated.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if this user is authenticated.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if authenticated, FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="changePassword" id="_changePassword">
 
 		<td class="attributes"><code>
@@ -446,18 +621,18 @@ argument.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_changePassword">#</a>
-		<code><a href="source-class-CryptUser.html#183-201" title="Go to source code">changePassword</a>( <span>string <var>$password</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#248-282" title="Go to source code">changePassword</a>( <span>string <var>$password</var></span>, <span>string <var>$callback</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Change the user's password and the other user elements that rely on the
+<p>Change the user's password and the SSL Key elements that rely on the
 password.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Change the user's password and the other user elements that rely on the
+<p>Change the user's password and the SSL Key elements that rely on the
 password.</p>
 
 
@@ -466,6 +641,12 @@ password.</p>
 				<div class="list"><dl>
 					<dt><var>$password</var></dt>
 					<dd><code>string</code><br>$password The new password to use.</dd>
+					<dt><var>$callback</var></dt>
+					<dd><code>string</code><br>$callback Optional callback function used by the application for post password
+change maintenance like re-encryption of data. The callback must accept two
+CryptUser objects, the first object is the CryptUser with the new password and
+encryption key, the second object is the Cryptuser with the old password and
+encryption key.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -490,7 +671,7 @@ password.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_encryptPackage">#</a>
-		<code><a href="source-class-CryptUser.html#207-214" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#288-299" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
 
 		<div class="description short">
 			
@@ -533,7 +714,7 @@ occurs.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_decryptPackage">#</a>
-		<code><a href="source-class-CryptUser.html#217-225" title="Go to source code">decryptPackage</a>( <span>string <var>$package</var></span>, <span>mixed <var>$envelope</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#302-313" title="Go to source code">decryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
 
 		<div class="description short">
 			
@@ -550,9 +731,7 @@ occurs.<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$package</var></dt>
-					<dd><code>string</code><br>$package The package to decrypt.</dd>
-					<dt><var>$envelope</var></dt>
-					<dd><code>mixed</code><br>$envelope The envelope for the package.</dd>
+					<dd><code>mixed</code><br>$package An associative array containing 'package' and 'envelope'.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -577,7 +756,7 @@ occurs.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hashPassword">#</a>
-		<code><a href="source-class-CryptUser.html#230-245" title="Go to source code">hashPassword</a>( <span>string <var>$password</var></span>, <span>string <var>$salt</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-CryptUser.html#318-333" title="Go to source code">hashPassword</a>( <span>string <var>$password</var></span>, <span>string <var>$salt</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -623,7 +802,7 @@ is provided then the best salt for this server will be generated.</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_bestSalt">#</a>
-		<code><a href="source-class-CryptUser.html#248-260" title="Go to source code">bestSalt</a>( )</code>
+		<code><a href="source-class-CryptUser.html#336-348" title="Go to source code">bestSalt</a>( )</code>
 
 		<div class="description short">
 			
@@ -693,6 +872,26 @@ is provided then the best salt for this server will be generated.</dd>
 		<td class="value"><code><span class="php-num">2</span></code></td>
 		<td class="description"><div>
 			<a href="#ACL_ACTIVE_FLAG" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ACL_ALL_FLAGS" id="ACL_ALL_FLAGS">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-CryptUser.html#37" title="Go to source code"><b>ACL_ALL_FLAGS</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">3</span></code></td>
+		<td class="description"><div>
+			<a href="#ACL_ALL_FLAGS" class="anchor">#</a>
 
 			<div class="description short">
 				

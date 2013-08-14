@@ -23,7 +23,7 @@
 require_once 'SSLKey.php';
 
 /**
- * User object.
+ * CryptUser object.
  *
  * @author Bryan Nielsen, bnielsen1965@gmail.com
  * @copyright Copyright 2013, Bryan Nielsen

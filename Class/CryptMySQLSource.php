@@ -23,7 +23,7 @@
 require_once 'CryptDataSource.php';
 
 /**
- * A MySQL based data source object.
+ * A MySQL based data source object for the CryptUsers.
  *
  * @author Bryan Nielsen, bnielsen1965@gmail.com
  * @copyright Copyright 2013, Bryan Nielsen
