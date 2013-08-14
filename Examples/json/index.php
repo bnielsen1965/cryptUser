@@ -340,8 +340,8 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 			<?php $inputString = 'The quick brown fox.'; ?>
 			Input String: <?php echo $inputString; ?><br>
 			<?php $encryptionPackage = $authenticatedUser->encryptPackage($inputString); ?>
-			Encryption Envelope: <span style="word-break: break-all;"><?php echo base64_encode($encryptionPackage['envelope']); ?></span> <br>
-			Encryption Package: <?php echo base64_encode($encryptionPackage['package']); ?> <br>
+			Encryption Envelope: <span style="word-break: break-all;"><?php echo $encryptionPackage['envelope']; ?></span> <br>
+			Encryption Package: <?php echo $encryptionPackage['package']; ?> <br>
 			<?php $outputString = $authenticatedUser->decryptPackage($encryptionPackage); ?>
 			Decrypted String: <?php echo $outputString; ?><br>
 			<?php } ?>

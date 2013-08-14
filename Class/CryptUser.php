@@ -323,6 +323,14 @@ class CryptUser {
 
 
 	
+	/**
+	 * Get the data source used for this user.
+	 * @return object The data source object for this user.
+	 */
+	public function getDatasource() {
+		return $this->dataSource;
+	}
+	
 	
 	/**
 	 * Hash the provided password string.

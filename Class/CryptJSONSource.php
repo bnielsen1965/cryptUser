@@ -198,7 +198,6 @@ class CryptJSONSource implements CryptDataSource {
 	public function writeJSONFile($data, $filename = NULL) {
 		// use this source filename if not provided
 		if (empty($filename)) $filename = $this->filename;
-		print_r($data);
 		
 		// save the JSON data to the file
 		return $this->lockedWrite($this->filename, json_encode($data));
@@ -215,7 +214,7 @@ class CryptJSONSource implements CryptDataSource {
 	*/
 	public function lockFile($filename, $createIfNotExist = TRUE) {
 		// check to see if opening a new file
-		if ($filename != $this->lockedFilename) {
+		if ($filename != $this->lockedFilename || empty($this->lockedFilePointer)) {
 			// create file if it does not exist
 			if ($createIfNotExist && !file_exists($filename)) touch($filename);
 		
@@ -311,6 +310,17 @@ class CryptJSONSource implements CryptDataSource {
 		}
 	}
 	
+	
+	/**
+	 * The magic __wakeup() function is used to clean up the file pointers when
+	 * the object is unserialized.
+	 */
+	public function __wakeup() {
+		// if file pointer is already open then close
+		if ($this->lockedFilePointer) {
+			$this->lockedFilePointer = NULL;
+		}
+	}
 }
 
 ?>
