@@ -43,7 +43,7 @@ class CryptMySQLSource implements CryptDataSource {
 			$this->mysqli = new mysqli($databaseConfig['host'], $databaseConfig['username'], $databaseConfig['password'], $databaseConfig['database']);
 			
 			if ($this->mysqli->connect_errno) {
-//				$this->errors[] = "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
+				throw new Exception("Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error);
 			}
 		}
 		

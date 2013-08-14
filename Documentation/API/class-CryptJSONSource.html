@@ -7,7 +7,7 @@
 	<title>Class CryptJSONSource | cryptUser</title>
 
 	<script type="text/javascript" src="resources/combined.js?368157054"></script>
-	<script type="text/javascript" src="elementlist.js?730208175"></script>
+	<script type="text/javascript" src="elementlist.js?1013147714"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -19,8 +19,16 @@
 
 
 		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
 		</div>
 
+		<hr />
 
 
 		<div id="elements">
@@ -59,6 +67,9 @@
 		<ul>
 			<li>
 				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
 			</li>
 			<li class="active">
 <span>Class</span>			</li>
@@ -110,7 +121,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-290" title="Go to source code">Class/CryptJSONSource.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-282" title="Go to source code">Class/CryptJSONSource.php</a><br />
 	</div>
 
 
@@ -128,7 +139,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-CryptJSONSource.html#38-49" title="Go to source code">__construct</a>( <span>mixed <var>$filename</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#37-50" title="Go to source code">__construct</a>( <span>mixed <var>$filename</var></span> )</code>
 
 		<div class="description short">
 			
@@ -161,7 +172,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSourceType">#</a>
-		<code><a href="source-class-CryptJSONSource.html#52-59" title="Go to source code">getSourceType</a>( )</code>
+		<code><a href="source-class-CryptJSONSource.html#53-60" title="Go to source code">getSourceType</a>( )</code>
 
 		<div class="description short">
 			
@@ -200,7 +211,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByName">#</a>
-		<code><a href="source-class-CryptJSONSource.html#62-81" title="Go to source code">getUserByName</a>( <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#63-82" title="Go to source code">getUserByName</a>( <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -245,7 +256,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUsernames">#</a>
-		<code><a href="source-class-CryptJSONSource.html#84-102" title="Go to source code">getUsernames</a>( )</code>
+		<code><a href="source-class-CryptJSONSource.html#85-103" title="Go to source code">getUsernames</a>( )</code>
 
 		<div class="description short">
 			
@@ -284,7 +295,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveUser">#</a>
-		<code><a href="source-class-CryptJSONSource.html#105-126" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#106-127" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
 
 		<div class="description short">
 			
@@ -328,7 +339,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteUser">#</a>
-		<code><a href="source-class-CryptJSONSource.html#129-152" title="Go to source code">deleteUser</a>( <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#130-153" title="Go to source code">deleteUser</a>( <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -361,6 +372,50 @@ found.<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="searchUsersForUser" id="_searchUsersForUser">
+
+		<td class="attributes"><code>
+			 private 
+			integer|boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchUsersForUser">#</a>
+		<code><a href="source-class-CryptJSONSource.html#156-169" title="Go to source code">searchUsersForUser</a>( <span>array <var>$users</var></span>, <span>mixed <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Search provided users array for the specified user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Search provided users array for the specified user.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$users</var></dt>
+					<dd><code>array</code><br>$users An array of user rows to search.</dd>
+					<dt><var>$username</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer|boolean</code><br>The array index for the user name or FALSE if not found.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="lockFile" id="_lockFile">
 
 		<td class="attributes"><code>
@@ -372,7 +427,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#175-211" title="Go to source code">lockFile</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#176-213" title="Go to source code">lockFile</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -389,7 +444,7 @@ found.<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$filename</var></dt>
-					<dd><code>filename</code><br>Filename of file to open and lock.</dd>
+					<dd><code><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code></code><br>Filename of file to open and lock.</dd>
 					<dt><var>$createIfNotExist</var></dt>
 					<dd><code>createIfNotExist</code><br>Optional boolean to specify if the file should be created if it does not exist.</dd>
 				</dl></div>
@@ -399,6 +454,10 @@ found.<br />
 					<code>boolean</code><br>Open status.<br />
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Exception.html">Exception</a></code></code><br>If cannot get lock on file for any reason.<br />
+				</div>
 
 
 
@@ -416,7 +475,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedRead">#</a>
-		<code><a href="source-class-CryptJSONSource.html#214-243" title="Go to source code">lockedRead</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#216-245" title="Go to source code">lockedRead</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -433,7 +492,7 @@ found.<br />
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$filename</var></dt>
-					<dd><code>filename</code><br>Filename of file to read.</dd>
+					<dd><code><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code></code><br>Filename of file to read.</dd>
 					<dt><var>$createIfNotExist</var></dt>
 					<dd><code>createIfNotExist</code><br>Optional boolean to specify if the file should be created if it does not exist.</dd>
 				</dl></div>
@@ -443,6 +502,10 @@ found.<br />
 					<code>string</code><br>or boolean Returns file contents in a string or FALSE on failure.<br />
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Exception.html">Exception</a></code></code><br>If for any reason the file is not locked.<br />
+				</div>
 
 
 
@@ -460,7 +523,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedWrite">#</a>
-		<code><a href="source-class-CryptJSONSource.html#246-278" title="Go to source code">lockedWrite</a>( <span>string <var>$filename</var></span>, <span>string <var>$buffer</var></span>, <span>boolean <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#248-280" title="Go to source code">lockedWrite</a>( <span>string <var>$filename</var></span>, <span>string <var>$buffer</var></span>, <span>boolean <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -490,43 +553,10 @@ not already exist.</dd>
 					<code>boolean</code><br>FALSE if write fails<br />
 				</div>
 
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getErrors" id="_getErrors">
-
-		<td class="attributes"><code>
-			 public 
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getErrors">#</a>
-		<code><a href="source-class-CryptJSONSource.html#281-288" title="Go to source code">getErrors</a>( )</code>
-
-		<div class="description short">
-			
-<p>Get the current object error messages.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Get the current object error messages.</p>
-
-
-
-
-				<h4>Returns</h4>
+				<h4>Throws</h4>
 				<div class="list">
-					<code>array</code><br>The current error messages.<br />
+					<code><code><a href="class-Exception.html">Exception</a></code></code><br>If for any reason the file is not locked.<br />
 				</div>
-
 
 
 
@@ -546,6 +576,78 @@ not already exist.</dd>
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="filename" id="$filename">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptJSONSource.html#32" title="Go to source code"><var>$filename</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$filename" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="lockedFilePointer" id="$lockedFilePointer">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptJSONSource.html#33" title="Go to source code"><var>$lockedFilePointer</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$lockedFilePointer" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="lockedFilename" id="$lockedFilename">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptJSONSource.html#34" title="Go to source code"><var>$lockedFilename</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$lockedFilename" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 

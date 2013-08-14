@@ -13,14 +13,21 @@ require_once '../../Class/CryptMySQLSource.php';
 // the MySQL data source will require the connection settings.
 $databaseConfig = array(
 	'host' => 'localhost',
-	'username' => 'mycrypt',
+	'username' => 'xmycrypt',
 	'password' => 'mycrypt',
 	'database' => 'mycrypt',
 	'usersTable' => 'testTable'
 );
 
 // Create the data source object for this application using the profided file.
-$dataSource = new CryptMySQLSource($databaseConfig);
+try {
+	$dataSource = new CryptMySQLSource($databaseConfig);
+}
+ catch (Exception $exception) {
+	 // data source failure
+	 echo $exception;
+	 exit;
+ }
 
 ?>
 <!DOCTYPE html>

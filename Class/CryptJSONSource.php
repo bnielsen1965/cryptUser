@@ -44,6 +44,9 @@ class CryptJSONSource implements CryptDataSource {
 		$this->lockedFilename = '';
 		
 		$this->filename = $filename;
+		
+		// use getUsernames as a way to test file locking
+		$this->getUsernames();
 	}
 	
 	
@@ -176,6 +179,7 @@ class CryptJSONSource implements CryptDataSource {
 	* @param filename Filename of file to open and lock.
 	* @param createIfNotExist Optional boolean to specify if the file should be created if it does not exist.
 	* @return boolean Open status.
+	* @throws Exception If cannot get lock on file for any reason.
 	*/
 	public function lockFile($filename, $createIfNotExist = TRUE) {
 		// check to see if opening a new file
@@ -200,10 +204,10 @@ class CryptJSONSource implements CryptDataSource {
 			}
 			else {
 				// lock failed
-//				$this->error = "Failed to get the lock on file!";
 				$this->lockedFilePointer = NULL;
 				$this->lockedFilename = '';
-				return FALSE;
+				
+				throw new Exception("Failed to get the lock on file!");
 			}
 		}
 	}
@@ -215,6 +219,7 @@ class CryptJSONSource implements CryptDataSource {
 	* @param filename Filename of file to read.
 	* @param createIfNotExist Optional boolean to specify if the file should be created if it does not exist.
 	* @return string or boolean Returns file contents in a string or FALSE on failure.
+	* @throws Exception If for any reason the file is not locked.
 	*/
 	public function lockedRead($filename, $createIfNotExist = TRUE) {
 		// make sure file is opened and locked
@@ -235,8 +240,7 @@ class CryptJSONSource implements CryptDataSource {
 			return $buffer;
 		}
 		else {
-//			$this->error = "Failed to get the lock on file!";
-			return FALSE;
+			throw new Exception("Failed to get the lock on file!");
 		}
 	}
 	
@@ -249,6 +253,7 @@ class CryptJSONSource implements CryptDataSource {
 	* @param boolean $createIfNotExist Optional, specifies if the file should be 
 	* created if it does not already exist.
 	* @return boolean FALSE if write fails
+	* @throws Exception If for any reason the file is not locked.
 	*/
 	public function lockedWrite($filename, $buffer, $createIfNotExist = TRUE) {
 		// make sure file is opened and locked
@@ -270,8 +275,7 @@ class CryptJSONSource implements CryptDataSource {
 			return TRUE;
 		}
 		else {
-//			$this->error = "Failed to get the lock on file!";
-			return FALSE;
+			throw new Exception("Failed to get the lock on file!");
 		}
 	}
 	

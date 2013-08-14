@@ -14,7 +14,14 @@ require_once '../../Class/CryptJSONSource.php';
 $filePath = dirname(__FILE__) . '/users.json';
 
 // Create the data source object for this application using the profided file.
-$dataSource = new CryptJSONSource($filePath);
+try {
+	$dataSource = new CryptJSONSource($filePath);
+}
+ catch (Exception $exception) {
+	 // data source failure
+	 echo $exception;
+	 exit;
+ }
 
 ?>
 <!DOCTYPE html>
