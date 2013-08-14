@@ -175,10 +175,9 @@ class CryptJSONSource implements CryptDataSource {
 	/**
 	* Open and lock a file for both read and write operations.
 	*
-	* @param filename    Filename of file to open and lock.
-	* @param mode    The file open mode.
-	* @param createIfNotExist    Optional boolean to specify if the file should be created if it does not exist.
-	* @return boolean    Open status.
+	* @param filename Filename of file to open and lock.
+	* @param createIfNotExist Optional boolean to specify if the file should be created if it does not exist.
+	* @return boolean Open status.
 	*/
 	public function lockFile($filename, $createIfNotExist = TRUE) {
 		// check to see if opening a new file
@@ -215,9 +214,9 @@ class CryptJSONSource implements CryptDataSource {
 	/**
 	* Read file with lock.
 	*
-	* @param filename    Filename of file to read.
-	* @param createIfNotExist    Optional boolean to specify if the file should be created if it does not exist.
-	* @return string or boolean    Returns file contents in a string or FALSE on failure.
+	* @param filename Filename of file to read.
+	* @param createIfNotExist Optional boolean to specify if the file should be created if it does not exist.
+	* @return string or boolean Returns file contents in a string or FALSE on failure.
 	*/
 	public function lockedRead($filename, $createIfNotExist = TRUE) {
 		// make sure file is opened and locked
@@ -245,10 +244,13 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	/**
-	* Write file with lock
+	* Write buffer to file with lock
 	*
-	* @param message    Message string
-	* @return boolean    FALSE if write fails
+	* @param string $filename The filename to write.
+	* @param string $buffer The buffer to write to the file.
+	* @param boolean $createIfNotExist Optional, specifies if the file should be 
+	* created if it does not already exist.
+	* @return boolean FALSE if write fails
 	*/
 	public function lockedWrite($filename, $buffer, $createIfNotExist = TRUE) {
 		// make sure file is opened and locked

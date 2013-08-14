@@ -110,7 +110,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-288" title="Go to source code">Class/CryptJSONSource.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-290" title="Go to source code">Class/CryptJSONSource.php</a><br />
 	</div>
 
 
@@ -372,7 +372,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#175-212" title="Go to source code">lockFile</a>( <span>filename <var>$filename</var></span>, <span>mode <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#175-211" title="Go to source code">lockFile</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -391,7 +391,7 @@ found.<br />
 					<dt><var>$filename</var></dt>
 					<dd><code>filename</code><br>Filename of file to open and lock.</dd>
 					<dt><var>$createIfNotExist</var></dt>
-					<dd><code>mode</code><br>The file open mode.</dd>
+					<dd><code>createIfNotExist</code><br>Optional boolean to specify if the file should be created if it does not exist.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -416,7 +416,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedRead">#</a>
-		<code><a href="source-class-CryptJSONSource.html#215-244" title="Go to source code">lockedRead</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#214-243" title="Go to source code">lockedRead</a>( <span>filename <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -460,28 +460,29 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedWrite">#</a>
-		<code><a href="source-class-CryptJSONSource.html#247-276" title="Go to source code">lockedWrite</a>( <span>message <var>$filename</var></span>, <span>mixed <var>$buffer</var></span>, <span>mixed <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#246-278" title="Go to source code">lockedWrite</a>( <span>string <var>$filename</var></span>, <span>string <var>$buffer</var></span>, <span>boolean <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Write file with lock</p>
+<p>Write buffer to file with lock</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Write file with lock</p>
+<p>Write buffer to file with lock</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$filename</var></dt>
-					<dd><code>message</code><br>Message string</dd>
+					<dd><code>string</code><br>$filename The filename to write.</dd>
 					<dt><var>$buffer</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$buffer The buffer to write to the file.</dd>
 					<dt><var>$createIfNotExist</var></dt>
-					<dd></dd>
+					<dd><code>boolean</code><br>$createIfNotExist Optional, specifies if the file should be created if it does
+not already exist.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -506,7 +507,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrors">#</a>
-		<code><a href="source-class-CryptJSONSource.html#279-286" title="Go to source code">getErrors</a>( )</code>
+		<code><a href="source-class-CryptJSONSource.html#281-288" title="Go to source code">getErrors</a>( )</code>
 
 		<div class="description short">
 			

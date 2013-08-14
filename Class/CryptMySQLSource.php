@@ -178,6 +178,7 @@ class CryptMySQLSource implements CryptDataSource {
 	 * Create users table.
 	 * 
 	 * @param string $createSQL Optional SQL statement to create the users table.
+	 * @return boolean TRUE on success, FALSE on failure.
 	 */
 	public function createUsersTable($createSQL = NULL) {
 		if ($this->mysqli->ping()) {
