@@ -45,8 +45,8 @@ class CryptJSONSource implements CryptDataSource {
 		
 		$this->filename = $filename;
 		
-		// use getUsernames as a way to test file locking
-		$this->getUsernames();
+		// read file to test file locking
+		$this->readJSONFile();
 	}
 	
 	
@@ -120,7 +120,7 @@ class CryptJSONSource implements CryptDataSource {
 			$users[] = $user;
 		}
 		
-		return $this->writeJSONFile($this->filename, $users);
+		return $this->writeJSONFile($users, $this->filename);
 	}
 	
 	
@@ -141,7 +141,7 @@ class CryptJSONSource implements CryptDataSource {
 			unset($users[$userIndex]);
 			
 			// save the list
-			return $this->writeJSONFile($this->filename, $users);
+			return $this->writeJSONFile($users, $this->filename);
 		}
 		else {
 			return FALSE;
@@ -168,12 +168,17 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	/**
-	 * Read a JSON formatted file and return as an associative array
+	 * Read a JSON formatted file using the file locking mechanism and return as an 
+	 * associative array
 	 * 
-	 * @param string $filename The filename of the JSON file to read.
+	 * @param string $filename Optional filename of the JSON file to write. If not
+	 * specified then the objects filename setting will be used.
 	 * @return array | boolean An associative array or FALSE on failure.
 	 */
-	public function readJSONFile($filename) {
+	public function readJSONFile($filename = NULL) {
+		// use this source filename if not provided
+		if (empty($filename)) $filename = $this->filename;
+		
 		// read the JSON file
 		$stringJSON = $this->lockedRead($filename);
 		$arrayJSON = json_decode($stringJSON, TRUE);
@@ -182,16 +187,21 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	/**
-	 * Write a JSON formatted file using the provided array or object.
+	 * Write a JSON formatted file using the file locking mechanism. The provided 
+	 * data array or object element will be used for the file contents.
 	 * 
-	 * @param string $filename The filename of the JSON file to write.
 	 * @param array | object $data An associative array or object to convert to JSON.
+	 * @param string $filename Optional filename of the JSON file to write. If not
+	 * specified then the objects filename setting will be used.
 	 * @return boolean TRUE on success, FALSE on failure.
 	 */
-	public function writeJSONFile($filename, $data) {
+	public function writeJSONFile($data, $filename = NULL) {
+		// use this source filename if not provided
+		if (empty($filename)) $filename = $this->filename;
+		print_r($data);
+		
 		// save the JSON data to the file
 		return $this->lockedWrite($this->filename, json_encode($data));
-
 	}
 
 	
