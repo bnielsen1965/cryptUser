@@ -110,7 +110,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-304" title="Go to source code">Class/CryptJSONSource.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptJSONSource.html#25-324" title="Go to source code">Class/CryptJSONSource.php</a><br />
 	</div>
 
 
@@ -416,24 +416,27 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_readJSONFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#170-181" title="Go to source code">readJSONFile</a>( <span>string <var>$filename</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#170-186" title="Go to source code">readJSONFile</a>( <span>string <var>$filename</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Read a JSON formatted file and return as an associative array</p>
+<p>Read a JSON formatted file using the file locking mechanism and return as an
+associative array</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Read a JSON formatted file and return as an associative array</p>
+<p>Read a JSON formatted file using the file locking mechanism and return as an
+associative array</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$filename</var></dt>
-					<dd><code>string</code><br>$filename The filename of the JSON file to read.</dd>
+					<dd><code>string</code><br>$filename Optional filename of the JSON file to write. If not specified then the
+objects filename setting will be used.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -458,26 +461,29 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeJSONFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#184-195" title="Go to source code">writeJSONFile</a>( <span>string <var>$filename</var></span>, <span>array <var>$data</var></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#189-204" title="Go to source code">writeJSONFile</a>( <span>array <var>$data</var></span>, <span>string <var>$filename</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Write a JSON formatted file using the provided array or object.</p>
+<p>Write a JSON formatted file using the file locking mechanism. The provided
+data array or object element will be used for the file contents.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Write a JSON formatted file using the provided array or object.</p>
+<p>Write a JSON formatted file using the file locking mechanism. The provided
+data array or object element will be used for the file contents.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$filename</var></dt>
-					<dd><code>string</code><br>$filename The filename of the JSON file to write.</dd>
 					<dt><var>$data</var></dt>
 					<dd><code>array</code><br>| object $data An associative array or object to convert to JSON.</dd>
+					<dt><var>$filename</var></dt>
+					<dd><code>string</code><br>$filename Optional filename of the JSON file to write. If not specified then the
+objects filename setting will be used.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -502,7 +508,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockFile">#</a>
-		<code><a href="source-class-CryptJSONSource.html#198-235" title="Go to source code">lockFile</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#207-244" title="Go to source code">lockFile</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -550,7 +556,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedRead">#</a>
-		<code><a href="source-class-CryptJSONSource.html#238-267" title="Go to source code">lockedRead</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#247-276" title="Go to source code">lockedRead</a>( <span><code><a href="class-CryptJSONSource.html#$filename">CryptJSONSource::<var>$filename</var></a></code> <var>$filename</var></span>, <span>createIfNotExist <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -598,7 +604,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lockedWrite">#</a>
-		<code><a href="source-class-CryptJSONSource.html#270-302" title="Go to source code">lockedWrite</a>( <span>string <var>$filename</var></span>, <span>string <var>$buffer</var></span>, <span>boolean <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-CryptJSONSource.html#279-311" title="Go to source code">lockedWrite</a>( <span>string <var>$filename</var></span>, <span>string <var>$buffer</var></span>, <span>boolean <var>$createIfNotExist</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -632,6 +638,41 @@ not already exist.</dd>
 				<div class="list">
 					<code>Exception</code><br>If for any reason the file is not locked.<br />
 				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__wakeup" id="___wakeup">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___wakeup">#</a>
+		<code><a href="source-class-CryptJSONSource.html#314-323" title="Go to source code">__wakeup</a>( )</code>
+
+		<div class="description short">
+			
+<p>The magic __wakeup() function is used to clean up the file pointers when the
+object is unserialized.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>The magic __wakeup() function is used to clean up the file pointers when the
+object is unserialized.</p>
+
+
+
+
+
 
 
 

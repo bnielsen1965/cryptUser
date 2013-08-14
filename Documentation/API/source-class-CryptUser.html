@@ -368,64 +368,81 @@
 </span></span><span id="292" class="l"><a class="l" href="#292">292: </a><span class="php-comment">     */</span>
 </span><span id="293" class="l"><a class="l" href="#293">293: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_encryptPackage" href="#_encryptPackage">encryptPackage</a>(<span class="php-var">$package</span>) {
 </span><span id="294" class="l"><a class="l" href="#294">294: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;primaryKey) {
-</span><span id="295" class="l"><a class="l" href="#295">295: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;primaryKey-&gt;encryptPackage(<span class="php-var">$package</span>);
-</span><span id="296" class="l"><a class="l" href="#296">296: </a>        }
-</span><span id="297" class="l"><a class="l" href="#297">297: </a>        
-</span><span id="298" class="l"><a class="l" href="#298">298: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
-</span><span id="299" class="l"><a class="l" href="#299">299: </a>    }
-</span><span id="300" class="l"><a class="l" href="#300">300: </a>    
-</span><span id="301" class="l"><a class="l" href="#301">301: </a>    
-</span><span id="302" class="l"><a class="l" href="#302">302: </a>    <span class="php-comment">/**
-</span></span><span id="303" class="l"><a class="l" href="#303">303: </a><span class="php-comment">     * Decrypt the sealed package using the primary SSL key pair.
-</span></span><span id="304" class="l"><a class="l" href="#304">304: </a><span class="php-comment">     * @param mixed $package An associative array containing 'package' and 'envelope'.
-</span></span><span id="305" class="l"><a class="l" href="#305">305: </a><span class="php-comment">     * @return mixed The decrypted package or FALSE if there was an error.
-</span></span><span id="306" class="l"><a class="l" href="#306">306: </a><span class="php-comment">     */</span>
-</span><span id="307" class="l"><a class="l" href="#307">307: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_decryptPackage" href="#_decryptPackage">decryptPackage</a>(<span class="php-var">$package</span>) {
-</span><span id="308" class="l"><a class="l" href="#308">308: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;primaryKey) {
-</span><span id="309" class="l"><a class="l" href="#309">309: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;primaryKey-&gt;decryptPackage(<span class="php-var">$package</span>[<span class="php-quote">'package'</span>], <span class="php-var">$package</span>[<span class="php-quote">'envelope'</span>]);
-</span><span id="310" class="l"><a class="l" href="#310">310: </a>        }
-</span><span id="311" class="l"><a class="l" href="#311">311: </a>        
-</span><span id="312" class="l"><a class="l" href="#312">312: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
-</span><span id="313" class="l"><a class="l" href="#313">313: </a>    }
-</span><span id="314" class="l"><a class="l" href="#314">314: </a>
-</span><span id="315" class="l"><a class="l" href="#315">315: </a>
-</span><span id="316" class="l"><a class="l" href="#316">316: </a>    
-</span><span id="317" class="l"><a class="l" href="#317">317: </a>    
-</span><span id="318" class="l"><a class="l" href="#318">318: </a>    <span class="php-comment">/**
-</span></span><span id="319" class="l"><a class="l" href="#319">319: </a><span class="php-comment">     * Hash the provided password string.
-</span></span><span id="320" class="l"><a class="l" href="#320">320: </a><span class="php-comment">     * @param string $password The plain text user password.
-</span></span><span id="321" class="l"><a class="l" href="#321">321: </a><span class="php-comment">     * @param string $salt Optional salt to use with crypt. The salt must be provided
-</span></span><span id="322" class="l"><a class="l" href="#322">322: </a><span class="php-comment">     * when performing a password hash check to make sure the hash values come out the
-</span></span><span id="323" class="l"><a class="l" href="#323">323: </a><span class="php-comment">     * same. If no salt is provided then the best salt for this server will be generated.
-</span></span><span id="324" class="l"><a class="l" href="#324">324: </a><span class="php-comment">     * @return string The hashed password.
-</span></span><span id="325" class="l"><a class="l" href="#325">325: </a><span class="php-comment">     */</span>
-</span><span id="326" class="l"><a class="l" href="#326">326: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_hashPassword" href="#_hashPassword">hashPassword</a>(<span class="php-var">$password</span>, <span class="php-var">$salt</span> = <span class="php-keyword1">NULL</span>) {
-</span><span id="327" class="l"><a class="l" href="#327">327: </a>        <span class="php-comment">// if password empty then return empty</span>
-</span><span id="328" class="l"><a class="l" href="#328">328: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword1">empty</span>(<span class="php-var">$password</span>) ) <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
-</span><span id="329" class="l"><a class="l" href="#329">329: </a>
-</span><span id="330" class="l"><a class="l" href="#330">330: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">is_null</span>(<span class="php-var">$salt</span>) ) <span class="php-var">$salt</span> = cryptUser::bestSalt();
-</span><span id="331" class="l"><a class="l" href="#331">331: </a>
-</span><span id="332" class="l"><a class="l" href="#332">332: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">crypt</span>(<span class="php-var">$password</span>, <span class="php-var">$salt</span>);
-</span><span id="333" class="l"><a class="l" href="#333">333: </a>    }
+</span><span id="295" class="l"><a class="l" href="#295">295: </a>            <span class="php-comment">// encrypt the package</span>
+</span><span id="296" class="l"><a class="l" href="#296">296: </a>            <span class="php-var">$encryptedPackage</span> = <span class="php-var">$this</span>-&gt;primaryKey-&gt;encryptPackage(<span class="php-var">$package</span>);
+</span><span id="297" class="l"><a class="l" href="#297">297: </a>            
+</span><span id="298" class="l"><a class="l" href="#298">298: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$encryptedPackage</span>) {
+</span><span id="299" class="l"><a class="l" href="#299">299: </a>                <span class="php-comment">// use base 64 encoding to make strings safe for various storage mechanisms</span>
+</span><span id="300" class="l"><a class="l" href="#300">300: </a>                <span class="php-var">$encryptedPackage</span>[<span class="php-quote">'envelope'</span>] = <span class="php-keyword2">base64_encode</span>(<span class="php-var">$encryptedPackage</span>[<span class="php-quote">'envelope'</span>]);
+</span><span id="301" class="l"><a class="l" href="#301">301: </a>                <span class="php-var">$encryptedPackage</span>[<span class="php-quote">'package'</span>] = <span class="php-keyword2">base64_encode</span>(<span class="php-var">$encryptedPackage</span>[<span class="php-quote">'package'</span>]);
+</span><span id="302" class="l"><a class="l" href="#302">302: </a>                
+</span><span id="303" class="l"><a class="l" href="#303">303: </a>                <span class="php-keyword1">return</span> <span class="php-var">$encryptedPackage</span>;
+</span><span id="304" class="l"><a class="l" href="#304">304: </a>            }
+</span><span id="305" class="l"><a class="l" href="#305">305: </a>        }
+</span><span id="306" class="l"><a class="l" href="#306">306: </a>        
+</span><span id="307" class="l"><a class="l" href="#307">307: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="308" class="l"><a class="l" href="#308">308: </a>    }
+</span><span id="309" class="l"><a class="l" href="#309">309: </a>    
+</span><span id="310" class="l"><a class="l" href="#310">310: </a>    
+</span><span id="311" class="l"><a class="l" href="#311">311: </a>    <span class="php-comment">/**
+</span></span><span id="312" class="l"><a class="l" href="#312">312: </a><span class="php-comment">     * Decrypt the sealed package using the primary SSL key pair.
+</span></span><span id="313" class="l"><a class="l" href="#313">313: </a><span class="php-comment">     * @param mixed $package An associative array containing 'package' and 'envelope'.
+</span></span><span id="314" class="l"><a class="l" href="#314">314: </a><span class="php-comment">     * @return mixed The decrypted package or FALSE if there was an error.
+</span></span><span id="315" class="l"><a class="l" href="#315">315: </a><span class="php-comment">     */</span>
+</span><span id="316" class="l"><a class="l" href="#316">316: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_decryptPackage" href="#_decryptPackage">decryptPackage</a>(<span class="php-var">$package</span>) {
+</span><span id="317" class="l"><a class="l" href="#317">317: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;primaryKey) {
+</span><span id="318" class="l"><a class="l" href="#318">318: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;primaryKey-&gt;decryptPackage(<span class="php-keyword2">base64_decode</span>(<span class="php-var">$package</span>[<span class="php-quote">'package'</span>]), <span class="php-keyword2">base64_decode</span>(<span class="php-var">$package</span>[<span class="php-quote">'envelope'</span>]));
+</span><span id="319" class="l"><a class="l" href="#319">319: </a>        }
+</span><span id="320" class="l"><a class="l" href="#320">320: </a>        
+</span><span id="321" class="l"><a class="l" href="#321">321: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="322" class="l"><a class="l" href="#322">322: </a>    }
+</span><span id="323" class="l"><a class="l" href="#323">323: </a>
+</span><span id="324" class="l"><a class="l" href="#324">324: </a>
+</span><span id="325" class="l"><a class="l" href="#325">325: </a>    
+</span><span id="326" class="l"><a class="l" href="#326">326: </a>    <span class="php-comment">/**
+</span></span><span id="327" class="l"><a class="l" href="#327">327: </a><span class="php-comment">     * Get the data source used for this user.
+</span></span><span id="328" class="l"><a class="l" href="#328">328: </a><span class="php-comment">     * @return object The data source object for this user.
+</span></span><span id="329" class="l"><a class="l" href="#329">329: </a><span class="php-comment">     */</span>
+</span><span id="330" class="l"><a class="l" href="#330">330: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getDatasource" href="#_getDatasource">getDatasource</a>() {
+</span><span id="331" class="l"><a class="l" href="#331">331: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;dataSource;
+</span><span id="332" class="l"><a class="l" href="#332">332: </a>    }
+</span><span id="333" class="l"><a class="l" href="#333">333: </a>    
 </span><span id="334" class="l"><a class="l" href="#334">334: </a>    
-</span><span id="335" class="l"><a class="l" href="#335">335: </a>    
-</span><span id="336" class="l"><a class="l" href="#336">336: </a>    <span class="php-comment">/**
-</span></span><span id="337" class="l"><a class="l" href="#337">337: </a><span class="php-comment">     * Determine the best salt to use for the crypt function on this server.
-</span></span><span id="338" class="l"><a class="l" href="#338">338: </a><span class="php-comment">     * @return string The salt to be used with crypt.
-</span></span><span id="339" class="l"><a class="l" href="#339">339: </a><span class="php-comment">     */</span>
-</span><span id="340" class="l"><a class="l" href="#340">340: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_bestSalt" href="#_bestSalt">bestSalt</a>() {
-</span><span id="341" class="l"><a class="l" href="#341">341: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_SHA512'</span>) &amp;&amp; CRYPT_SHA512 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$6$'</span> . SSLKey::makePhrase(<span class="php-num">16</span>) . <span class="php-quote">'$'</span>;
-</span><span id="342" class="l"><a class="l" href="#342">342: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_SHA256'</span>) &amp;&amp; CRYPT_SHA256 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$5$'</span> . SSLKey::makePhrase(<span class="php-num">16</span>) . <span class="php-quote">'$'</span>;
-</span><span id="343" class="l"><a class="l" href="#343">343: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_BLOWFISH'</span>) &amp;&amp; CRYPT_BLOWFISH == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$2a$07$'</span> . <span class="php-keyword2">base64_encode</span>(SSLKey::makePhrase(<span class="php-num">22</span>)) . <span class="php-quote">'$'</span>;
-</span><span id="344" class="l"><a class="l" href="#344">344: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_MD5'</span>) &amp;&amp; CRYPT_MD5 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$1$'</span> . SSLKey::makePhrase(<span class="php-num">12</span>) . <span class="php-quote">'$'</span>;
-</span><span id="345" class="l"><a class="l" href="#345">345: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_EXT_DES'</span>) &amp;&amp; CRYPT_EXT_DES == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'_'</span> . SSLKey::makePhrase(<span class="php-num">8</span>);
-</span><span id="346" class="l"><a class="l" href="#346">346: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_STD_DES'</span>) &amp;&amp; CRYPT_STD_DES == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> SSLKey::makePhrase(<span class="php-num">2</span>);
-</span><span id="347" class="l"><a class="l" href="#347">347: </a>        <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
-</span><span id="348" class="l"><a class="l" href="#348">348: </a>    }
-</span><span id="349" class="l"><a class="l" href="#349">349: </a>}
-</span><span id="350" class="l"><a class="l" href="#350">350: </a>
-</span><span id="351" class="l"><a class="l" href="#351">351: </a><span class="xlang">?&gt;</span>
-</span><span id="352" class="l"><a class="l" href="#352">352: </a></span></code></pre>
+</span><span id="335" class="l"><a class="l" href="#335">335: </a>    <span class="php-comment">/**
+</span></span><span id="336" class="l"><a class="l" href="#336">336: </a><span class="php-comment">     * Hash the provided password string.
+</span></span><span id="337" class="l"><a class="l" href="#337">337: </a><span class="php-comment">     * @param string $password The plain text user password.
+</span></span><span id="338" class="l"><a class="l" href="#338">338: </a><span class="php-comment">     * @param string $salt Optional salt to use with crypt. The salt must be provided
+</span></span><span id="339" class="l"><a class="l" href="#339">339: </a><span class="php-comment">     * when performing a password hash check to make sure the hash values come out the
+</span></span><span id="340" class="l"><a class="l" href="#340">340: </a><span class="php-comment">     * same. If no salt is provided then the best salt for this server will be generated.
+</span></span><span id="341" class="l"><a class="l" href="#341">341: </a><span class="php-comment">     * @return string The hashed password.
+</span></span><span id="342" class="l"><a class="l" href="#342">342: </a><span class="php-comment">     */</span>
+</span><span id="343" class="l"><a class="l" href="#343">343: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_hashPassword" href="#_hashPassword">hashPassword</a>(<span class="php-var">$password</span>, <span class="php-var">$salt</span> = <span class="php-keyword1">NULL</span>) {
+</span><span id="344" class="l"><a class="l" href="#344">344: </a>        <span class="php-comment">// if password empty then return empty</span>
+</span><span id="345" class="l"><a class="l" href="#345">345: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword1">empty</span>(<span class="php-var">$password</span>) ) <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
+</span><span id="346" class="l"><a class="l" href="#346">346: </a>
+</span><span id="347" class="l"><a class="l" href="#347">347: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">is_null</span>(<span class="php-var">$salt</span>) ) <span class="php-var">$salt</span> = cryptUser::bestSalt();
+</span><span id="348" class="l"><a class="l" href="#348">348: </a>
+</span><span id="349" class="l"><a class="l" href="#349">349: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">crypt</span>(<span class="php-var">$password</span>, <span class="php-var">$salt</span>);
+</span><span id="350" class="l"><a class="l" href="#350">350: </a>    }
+</span><span id="351" class="l"><a class="l" href="#351">351: </a>    
+</span><span id="352" class="l"><a class="l" href="#352">352: </a>    
+</span><span id="353" class="l"><a class="l" href="#353">353: </a>    <span class="php-comment">/**
+</span></span><span id="354" class="l"><a class="l" href="#354">354: </a><span class="php-comment">     * Determine the best salt to use for the crypt function on this server.
+</span></span><span id="355" class="l"><a class="l" href="#355">355: </a><span class="php-comment">     * @return string The salt to be used with crypt.
+</span></span><span id="356" class="l"><a class="l" href="#356">356: </a><span class="php-comment">     */</span>
+</span><span id="357" class="l"><a class="l" href="#357">357: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_bestSalt" href="#_bestSalt">bestSalt</a>() {
+</span><span id="358" class="l"><a class="l" href="#358">358: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_SHA512'</span>) &amp;&amp; CRYPT_SHA512 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$6$'</span> . SSLKey::makePhrase(<span class="php-num">16</span>) . <span class="php-quote">'$'</span>;
+</span><span id="359" class="l"><a class="l" href="#359">359: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_SHA256'</span>) &amp;&amp; CRYPT_SHA256 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$5$'</span> . SSLKey::makePhrase(<span class="php-num">16</span>) . <span class="php-quote">'$'</span>;
+</span><span id="360" class="l"><a class="l" href="#360">360: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_BLOWFISH'</span>) &amp;&amp; CRYPT_BLOWFISH == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$2a$07$'</span> . <span class="php-keyword2">base64_encode</span>(SSLKey::makePhrase(<span class="php-num">22</span>)) . <span class="php-quote">'$'</span>;
+</span><span id="361" class="l"><a class="l" href="#361">361: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_MD5'</span>) &amp;&amp; CRYPT_MD5 == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'$1$'</span> . SSLKey::makePhrase(<span class="php-num">12</span>) . <span class="php-quote">'$'</span>;
+</span><span id="362" class="l"><a class="l" href="#362">362: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_EXT_DES'</span>) &amp;&amp; CRYPT_EXT_DES == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> <span class="php-quote">'_'</span> . SSLKey::makePhrase(<span class="php-num">8</span>);
+</span><span id="363" class="l"><a class="l" href="#363">363: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">defined</span>(<span class="php-quote">'CRYPT_STD_DES'</span>) &amp;&amp; CRYPT_STD_DES == <span class="php-num">1</span> ) <span class="php-keyword1">return</span> SSLKey::makePhrase(<span class="php-num">2</span>);
+</span><span id="364" class="l"><a class="l" href="#364">364: </a>        <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
+</span><span id="365" class="l"><a class="l" href="#365">365: </a>    }
+</span><span id="366" class="l"><a class="l" href="#366">366: </a>}
+</span><span id="367" class="l"><a class="l" href="#367">367: </a>
+</span><span id="368" class="l"><a class="l" href="#368">368: </a><span class="xlang">?&gt;</span>
+</span><span id="369" class="l"><a class="l" href="#369">369: </a></span></code></pre>
 
 	<div id="footer">
 		cryptUser API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
