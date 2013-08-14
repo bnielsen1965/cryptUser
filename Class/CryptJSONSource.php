@@ -68,8 +68,7 @@ class CryptJSONSource implements CryptDataSource {
 	 */
 	public function getUserByName($username) {
 		// read the JSON file
-		$usersJSON = $this->lockedRead($this->filename);
-		$users = json_decode($usersJSON, TRUE);
+		$users = $this->readJSONFile($this->filename);
 		
 		if ($users) {
 			foreach ($users as $user) {
@@ -87,8 +86,7 @@ class CryptJSONSource implements CryptDataSource {
 	 * @return array An array of strings containing the usernames from the data source.
 	 */
 	public function getUsernames() {
-		$usersJSON = $this->lockedRead($this->filename);
-		$users = json_decode($usersJSON, TRUE);
+		$users = $this->readJSONFile($this->filename);
 		
 		if ($users) {
 			$usernames = array();
@@ -110,8 +108,7 @@ class CryptJSONSource implements CryptDataSource {
 	 */
 	public function saveUser($user) {
 		// read the JSON file
-		$usersJSON = $this->lockedRead($this->filename);
-		$users = json_decode($usersJSON, TRUE);
+		$users = $this->readJSONFile($this->filename);
 		
 		// determine if user exists
 		if (($ui = $this->searchUsersForUser($users, $user['username'])) !== FALSE) {
@@ -123,7 +120,7 @@ class CryptJSONSource implements CryptDataSource {
 			$users[] = $user;
 		}
 		
-		return $this->lockedWrite($this->filename, json_encode($users));
+		return $this->writeJSONFile($this->filename, $users);
 	}
 	
 	
@@ -134,8 +131,7 @@ class CryptJSONSource implements CryptDataSource {
 	 */
 	public function deleteUser($username) {
 		// read the JSON file
-		$usersJSON = $this->lockedRead($this->filename);
-		$users = json_decode($usersJSON, TRUE);
+		$users = $this->readJSONFile($this->filename);
 		
 		// find the index to the specified user
 		$userIndex = $this->searchUsersForUser($users, $username);
@@ -145,7 +141,7 @@ class CryptJSONSource implements CryptDataSource {
 			unset($users[$userIndex]);
 			
 			// save the list
-			return $this->lockedWrite($this->filename, json_encode($users));
+			return $this->writeJSONFile($this->filename, $users);
 		}
 		else {
 			return FALSE;
@@ -171,7 +167,33 @@ class CryptJSONSource implements CryptDataSource {
 	
 	
 	
+	/**
+	 * Read a JSON formatted file and return as an associative array
+	 * 
+	 * @param string $filename The filename of the JSON file to read.
+	 * @return array | boolean An associative array or FALSE on failure.
+	 */
+	public function readJSONFile($filename) {
+		// read the JSON file
+		$stringJSON = $this->lockedRead($filename);
+		$arrayJSON = json_decode($stringJSON, TRUE);
+		return $arrayJSON;
+	}
 	
+	
+	/**
+	 * Write a JSON formatted file using the provided array or object.
+	 * 
+	 * @param string $filename The filename of the JSON file to write.
+	 * @param array | object $data An associative array or object to convert to JSON.
+	 * @return boolean TRUE on success, FALSE on failure.
+	 */
+	public function writeJSONFile($filename, $data) {
+		// save the JSON data to the file
+		return $this->lockedWrite($this->filename, json_encode($data));
+
+	}
+
 	
 	/**
 	* Open and lock a file for both read and write operations.
