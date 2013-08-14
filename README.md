@@ -57,3 +57,4 @@ to the user encryption functions.
 The source tree includes a Documentation folder with HTML documentation generated
 from the source code using APIGen.
 
+The API documentation can be viewed [here](http://bnielsen1965.github.io/cryptUser/).
