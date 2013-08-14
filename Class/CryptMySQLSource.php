@@ -30,7 +30,6 @@ require_once 'CryptDataSource.php';
  */
 class CryptMySQLSource implements CryptDataSource {
 	private $mysqli;
-	private $errors;
 	private $usersTable;
 	
 	
@@ -39,14 +38,12 @@ class CryptMySQLSource implements CryptDataSource {
 	 * 
 	 */
 	public function __construct($databaseConfig) {
-		$this->errors = array();
-		
 		// connect if parameters provided
 		if (!empty($databaseConfig['host']) && !empty($databaseConfig['username']) && !empty($databaseConfig['password']) && !empty($databaseConfig['database'])) {
 			$this->mysqli = new mysqli($databaseConfig['host'], $databaseConfig['username'], $databaseConfig['password'], $databaseConfig['database']);
 			
 			if ($this->mysqli->connect_errno) {
-				$this->errors[] = "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
+//				$this->errors[] = "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
 			}
 		}
 		

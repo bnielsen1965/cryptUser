@@ -30,7 +30,6 @@ require_once 'CryptDataSource.php';
  */
 class CryptJSONSource implements CryptDataSource {
 	private $filename;
-	private $errors;
 	private $lockedFilePointer; // pointer to the currently open locked file
 	private $lockedFilename; // filename for the currently open locked file
 	
@@ -44,7 +43,6 @@ class CryptJSONSource implements CryptDataSource {
 		$this->lockedFilePointer = NULL;
 		$this->lockedFilename = '';
 		
-		$this->errors = array();
 		$this->filename = $filename;
 	}
 	
@@ -202,7 +200,7 @@ class CryptJSONSource implements CryptDataSource {
 			}
 			else {
 				// lock failed
-				$this->error = "Failed to get the lock on file!";
+//				$this->error = "Failed to get the lock on file!";
 				$this->lockedFilePointer = NULL;
 				$this->lockedFilename = '';
 				return FALSE;
@@ -237,7 +235,7 @@ class CryptJSONSource implements CryptDataSource {
 			return $buffer;
 		}
 		else {
-			$this->error = "Failed to get the lock on file!";
+//			$this->error = "Failed to get the lock on file!";
 			return FALSE;
 		}
 	}
@@ -272,19 +270,9 @@ class CryptJSONSource implements CryptDataSource {
 			return TRUE;
 		}
 		else {
-			$this->error = "Failed to get the lock on file!";
+//			$this->error = "Failed to get the lock on file!";
 			return FALSE;
 		}
-	}
-	
-	
-	/**
-	* Get the current object error messages.
-	*
-	* @return array The current error messages.
-	*/
-	public function getErrors() {
-		return $this->errors;
 	}
 	
 }
