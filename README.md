@@ -18,6 +18,13 @@ Copy the Class folder to your PHP application directory.
 The Tests folder includes phpunit testing files. Copy this folder to your PHP 
 application directory and run phpunit Tests/.
 
+
+There are also example implementations for both a JSON or MySQL data source in
+the Examples/ directory. The JSON example will require proper write permissions
+on the directory to enable writing to the JSON based data file. When using the
+MySQL example a database must be provided and the connection settings set
+appropriately in the example index.php file.
+
 ---------------------------------
 
 
@@ -43,4 +50,10 @@ CryptMySQLSource uses a MySQL database as the data source.
 The CryptUser class provides the functions for user administration and access 
 to the user encryption functions.
 
+---------------------------------
+
+# DOCUMENTATION
+
+The source tree includes a Documentation folder with HTML documentation generated
+from the source code using APIGen.
 
