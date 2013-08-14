@@ -8,7 +8,7 @@
 	<title>File Class/SSLKey.php | cryptUser</title>
 
 	<script type="text/javascript" src="resources/combined.js?368157054"></script>
-	<script type="text/javascript" src="elementlist.js?359993623"></script>
+	<script type="text/javascript" src="elementlist.js?730208175"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -30,9 +30,7 @@
 				<li><a href="class-CryptJSONSource.html">CryptJSONSource</a></li>
 				<li><a href="class-CryptMySQLSource.html">CryptMySQLSource</a></li>
 				<li><a href="class-CryptUser.html">CryptUser</a></li>
-				<li><a href="class-CryptUserTest.html">CryptUserTest</a></li>
 				<li class="active"><a href="class-SSLKey.html">SSLKey</a></li>
-				<li><a href="class-SSLKeyTest.html">SSLKeyTest</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -250,7 +248,7 @@
 </span></span><span id="172" class="l"><a class="l" href="#172">172: </a><span class="php-comment">     * @return string The discovered pass phrase or NULL if not found.
 </span></span><span id="173" class="l"><a class="l" href="#173">173: </a><span class="php-comment">     */</span>
 </span><span id="174" class="l"><a class="l" href="#174">174: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_parsePhrase" href="#_parsePhrase">parsePhrase</a>(<span class="php-var">$str</span>) {
-</span><span id="175" class="l"><a class="l" href="#175">175: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/-----BEGIN PHRASE-----(.*)-----END PHRASE-----/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
+</span><span id="175" class="l"><a class="l" href="#175">175: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/(-----BEGIN PHRASE-----.*-----END PHRASE-----)/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
 </span><span id="176" class="l"><a class="l" href="#176">176: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">trim</span>(<span class="php-var">$ma</span>[<span class="php-num">1</span>][<span class="php-num">0</span>]);
 </span><span id="177" class="l"><a class="l" href="#177">177: </a>        }
 </span><span id="178" class="l"><a class="l" href="#178">178: </a>
@@ -264,7 +262,7 @@
 </span></span><span id="186" class="l"><a class="l" href="#186">186: </a><span class="php-comment">     * @return string The discovered certificate or NULL if not found.
 </span></span><span id="187" class="l"><a class="l" href="#187">187: </a><span class="php-comment">     */</span>
 </span><span id="188" class="l"><a class="l" href="#188">188: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_parseCertificate" href="#_parseCertificate">parseCertificate</a>(<span class="php-var">$str</span>) {
-</span><span id="189" class="l"><a class="l" href="#189">189: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/-----BEGIN CERTIFICATE-----(.*)-----END CERTIFICATE-----/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
+</span><span id="189" class="l"><a class="l" href="#189">189: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/(-----BEGIN CERTIFICATE-----.*-----END CERTIFICATE-----)/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
 </span><span id="190" class="l"><a class="l" href="#190">190: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">trim</span>(<span class="php-var">$ma</span>[<span class="php-num">1</span>][<span class="php-num">0</span>]);
 </span><span id="191" class="l"><a class="l" href="#191">191: </a>        }
 </span><span id="192" class="l"><a class="l" href="#192">192: </a>
@@ -278,7 +276,7 @@
 </span></span><span id="200" class="l"><a class="l" href="#200">200: </a><span class="php-comment">     * @return string The discovered private key or NULL if not found.
 </span></span><span id="201" class="l"><a class="l" href="#201">201: </a><span class="php-comment">     */</span>
 </span><span id="202" class="l"><a class="l" href="#202">202: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_parsePrivateKey" href="#_parsePrivateKey">parsePrivateKey</a>(<span class="php-var">$str</span>) {
-</span><span id="203" class="l"><a class="l" href="#203">203: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/-----BEGIN ENCRYPTED PRIVATE KEY-----(.*)-----END ENCRYPTED PRIVATE KEY-----/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
+</span><span id="203" class="l"><a class="l" href="#203">203: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/(-----BEGIN ENCRYPTED PRIVATE KEY-----.*-----END ENCRYPTED PRIVATE KEY-----)/msU'</span>, <span class="php-var">$str</span>, <span class="php-var">$ma</span>, PREG_OFFSET_CAPTURE)) {
 </span><span id="204" class="l"><a class="l" href="#204">204: </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">trim</span>(<span class="php-var">$ma</span>[<span class="php-num">1</span>][<span class="php-num">0</span>]);
 </span><span id="205" class="l"><a class="l" href="#205">205: </a>        }
 </span><span id="206" class="l"><a class="l" href="#206">206: </a>
