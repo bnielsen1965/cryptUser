@@ -31,6 +31,7 @@ require_once 'CryptDataSource.php';
 class CryptMySQLSource implements CryptDataSource {
 	private $mysqli;
 	private $usersTable;
+	private $databaseConfig;
 	
 	
 	/**
@@ -38,17 +39,32 @@ class CryptMySQLSource implements CryptDataSource {
 	 * 
 	 */
 	public function __construct($databaseConfig) {
+		$this->databaseConfig = $databaseConfig;
+		$this->connectToDatabase();
+		
+		$this->usersTable = (!empty($databaseConfig['usersTable']) ? $databaseConfig['usersTable'] : 'users');
+	}
+	
+	
+	/**
+	 * Connect to the database
+	 */
+	private function connectToDatabase() {
 		// connect if parameters provided
-		if (!empty($databaseConfig['host']) && !empty($databaseConfig['username']) && !empty($databaseConfig['password']) && !empty($databaseConfig['database'])) {
-			$this->mysqli = new mysqli($databaseConfig['host'], $databaseConfig['username'], $databaseConfig['password'], $databaseConfig['database']);
+		if (	!empty($this->databaseConfig['host']) && 
+				!empty($this->databaseConfig['username']) && 
+				!empty($this->databaseConfig['password']) && 
+				!empty($this->databaseConfig['database'])) {
+			$this->mysqli = new mysqli(
+					$this->databaseConfig['host'], 
+					$this->databaseConfig['username'], 
+					$this->databaseConfig['password'], 
+					$this->databaseConfig['database']);
 			
 			if ($this->mysqli->connect_errno) {
 				throw new Exception("Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error);
 			}
 		}
-		
-		if (!empty($databaseConfig['usersTable'])) $this->usersTable = $databaseConfig['usersTable'];
-		else $this->usersTable = 'users';
 	}
 	
 	
@@ -184,6 +200,15 @@ class CryptMySQLSource implements CryptDataSource {
 		}
 		
 		return FALSE;
+	}
+	
+	
+	/**
+	 * The magic __wakeup() function is used to reconnect to the database when
+	 * the object is unserialized.
+	 */
+	public function __wakeup() {
+		$this->connectToDatabase();
 	}
 }
 

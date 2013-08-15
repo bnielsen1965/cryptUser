@@ -98,10 +98,6 @@ function changePasswordCallback($oldCryptUser, $newCryptUser) {
 			table, th, td {
 				border: 1px solid black;
 			}
-			
-			td {
-				word-break: break-all;
-			}
 		</style>
     </head>
     <body>
@@ -132,7 +128,7 @@ function changePasswordCallback($oldCryptUser, $newCryptUser) {
 				echo '<tr><th>Title:</th><td>' . $record['title'] . '</td></tr>';
 				echo '<tr><th>Decrypted</th><th>Encrypted</th></tr>';
 				echo '<tr><td>' . $theUser->decryptPackage($record['record']) . '</td>' .
-					'<td><b>Envelope:</b> ' . $record['record']['envelope'] . '<br>' .
+					'<td style="word-break: break-all;"><b>Envelope:</b> ' . $record['record']['envelope'] . '<br>' .
 					'<b>Package:</b> ' . $record['record']['package'] . '</td></tr>';
 				echo '</table>';
 			}

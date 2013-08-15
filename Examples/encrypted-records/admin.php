@@ -65,7 +65,7 @@ if (!empty($_GET['delete'])) {
 	// try to delete the user
 	if ($dataSource->deleteUser($deleteUsername)) {
 		// remove any user data files
-		unlink(USER_DATA_FILE_PATH . $deleteUsername . '.json');
+		if (file_exists(USER_DATA_FILE_PATH . $deleteUsername . '.json')) unlink(USER_DATA_FILE_PATH . $deleteUsername . '.json');
 	}
 }
 
@@ -105,8 +105,8 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_flags') {
 	<body>
 		<div>
 			Hello <?php echo $username; ?>
-			| <a href="index.php">Log Out</a>
-			| <a href="home.php">Home</a>
+			| <a href="index.php">[Log Out]</a>
+			| <a href="home.php">[Home]</a>
 		</div>
 		
 		<?php if (!empty($errorMessage)) { ?>
