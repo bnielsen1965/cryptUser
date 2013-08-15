@@ -101,7 +101,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptUser.html#25-349" title="Go to source code">Class/CryptUser.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptUser.html#25-366" title="Go to source code">Class/CryptUser.php</a><br />
 	</div>
 
 
@@ -143,6 +143,43 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 					<dd><code>string</code><br>$dataSource An object to provide the user data.</dd>
 				</dl></div>
 
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadUser" id="_loadUser">
+
+		<td class="attributes"><code>
+			 private 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadUser">#</a>
+		<code><a href="source-class-CryptUser.html#70-105" title="Go to source code">loadUser</a>( )</code>
+
+		<div class="description short">
+			
+<p>Load this user defined by this object from the data source</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load this user defined by this object from the data source</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure<br />
+				</div>
 
 
 
@@ -671,7 +708,7 @@ encryption key.</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_encryptPackage">#</a>
-		<code><a href="source-class-CryptUser.html#288-299" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#288-308" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
 
 		<div class="description short">
 			
@@ -714,7 +751,7 @@ occurs.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_decryptPackage">#</a>
-		<code><a href="source-class-CryptUser.html#302-313" title="Go to source code">decryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
+		<code><a href="source-class-CryptUser.html#311-322" title="Go to source code">decryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
 
 		<div class="description short">
 			
@@ -745,6 +782,43 @@ occurs.<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getDatasource" id="_getDatasource">
+
+		<td class="attributes"><code>
+			 public 
+			object
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDatasource">#</a>
+		<code><a href="source-class-CryptUser.html#326-332" title="Go to source code">getDatasource</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the data source used for this user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the data source used for this user.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>object</code><br>The data source object for this user.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="hashPassword" id="_hashPassword">
 
 		<td class="attributes"><code>
@@ -756,7 +830,7 @@ occurs.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hashPassword">#</a>
-		<code><a href="source-class-CryptUser.html#318-333" title="Go to source code">hashPassword</a>( <span>string <var>$password</var></span>, <span>string <var>$salt</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-CryptUser.html#335-350" title="Go to source code">hashPassword</a>( <span>string <var>$password</var></span>, <span>string <var>$salt</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -802,7 +876,7 @@ is provided then the best salt for this server will be generated.</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_bestSalt">#</a>
-		<code><a href="source-class-CryptUser.html#336-348" title="Go to source code">bestSalt</a>( )</code>
+		<code><a href="source-class-CryptUser.html#353-365" title="Go to source code">bestSalt</a>( )</code>
 
 		<div class="description short">
 			
@@ -908,6 +982,197 @@ is provided then the best salt for this server will be generated.</dd>
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="username" id="$username">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#40-43" title="Go to source code"><var>$username</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$username" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Class properties</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Class properties</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="password" id="$password">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#44" title="Go to source code"><var>$password</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$password" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="passwordHash" id="$passwordHash">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#45" title="Go to source code"><var>$passwordHash</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$passwordHash" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="authenticated" id="$authenticated">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#46" title="Go to source code"><var>$authenticated</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$authenticated" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="primaryKey" id="$primaryKey">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#47" title="Go to source code"><var>$primaryKey</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$primaryKey" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="sslKey" id="$sslKey">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#48" title="Go to source code"><var>$sslKey</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$sslKey" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="flags" id="$flags">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#49" title="Go to source code"><var>$flags</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$flags" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="dataSource" id="$dataSource">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptUser.html#50" title="Go to source code"><var>$dataSource</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$dataSource" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 

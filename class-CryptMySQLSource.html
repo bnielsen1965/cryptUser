@@ -110,7 +110,7 @@
 				<b>Author:</b>
 				Bryan Nielsen, <a
 href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
-		<b>Located at</b> <a href="source-class-CryptMySQLSource.html#25-190" title="Go to source code">Class/CryptMySQLSource.php</a><br />
+		<b>Located at</b> <a href="source-class-CryptMySQLSource.html#25-188" title="Go to source code">Class/CryptMySQLSource.php</a><br />
 	</div>
 
 
@@ -128,7 +128,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#37-55" title="Go to source code">__construct</a>( <span>mixed <var>$databaseConfig</var></span> )</code>
+		<code><a href="source-class-CryptMySQLSource.html#36-52" title="Go to source code">__construct</a>( <span>mixed <var>$databaseConfig</var></span> )</code>
 
 		<div class="description short">
 			
@@ -161,7 +161,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSourceType">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#58-65" title="Go to source code">getSourceType</a>( )</code>
+		<code><a href="source-class-CryptMySQLSource.html#55-62" title="Go to source code">getSourceType</a>( )</code>
 
 		<div class="description short">
 			
@@ -200,7 +200,7 @@ href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserByName">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#68-83" title="Go to source code">getUserByName</a>( <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-CryptMySQLSource.html#65-80" title="Go to source code">getUserByName</a>( <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -245,7 +245,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUsernames">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#86-103" title="Go to source code">getUsernames</a>( )</code>
+		<code><a href="source-class-CryptMySQLSource.html#83-100" title="Go to source code">getUsernames</a>( )</code>
 
 		<div class="description short">
 			
@@ -284,7 +284,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveUser">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#106-131" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
+		<code><a href="source-class-CryptMySQLSource.html#103-128" title="Go to source code">saveUser</a>( <span>array <var>$user</var></span> )</code>
 
 		<div class="description short">
 			
@@ -328,7 +328,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteUser">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#134-142" title="Go to source code">deleteUser</a>( <span>string <var>$username</var></span> )</code>
+		<code><a href="source-class-CryptMySQLSource.html#131-139" title="Go to source code">deleteUser</a>( <span>string <var>$username</var></span> )</code>
 
 		<div class="description short">
 			
@@ -361,6 +361,50 @@ found.<br />
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="searchUsersForUser" id="_searchUsersForUser">
+
+		<td class="attributes"><code>
+			 private 
+			integer|boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchUsersForUser">#</a>
+		<code><a href="source-class-CryptMySQLSource.html#142-155" title="Go to source code">searchUsersForUser</a>( <span>array <var>$users</var></span>, <span>mixed <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Search provided users array for the specified user.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Search provided users array for the specified user.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$users</var></dt>
+					<dd><code>array</code><br>$users An array of user rows to search.</dd>
+					<dt><var>$username</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer|boolean</code><br>The array index for the user name or FALSE if not found.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getCreateUserTableSQL" id="_getCreateUserTableSQL">
 
 		<td class="attributes"><code>
@@ -372,7 +416,7 @@ found.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreateUserTableSQL">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#161-174" title="Go to source code">getCreateUserTableSQL</a>( )</code>
+		<code><a href="source-class-CryptMySQLSource.html#158-171" title="Go to source code">getCreateUserTableSQL</a>( )</code>
 
 		<div class="description short">
 			
@@ -402,14 +446,14 @@ found.<br />
 
 		<td class="attributes"><code>
 			 public 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createUsersTable">#</a>
-		<code><a href="source-class-CryptMySQLSource.html#177-189" title="Go to source code">createUsersTable</a>( <span>string <var>$createSQL</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-CryptMySQLSource.html#174-187" title="Go to source code">createUsersTable</a>( <span>string <var>$createSQL</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -429,6 +473,10 @@ found.<br />
 					<dd><code>string</code><br>$createSQL Optional SQL statement to create the users table.</dd>
 				</dl></div>
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE on success, FALSE on failure.<br />
+				</div>
 
 
 
@@ -449,6 +497,55 @@ found.<br />
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="mysqli" id="$mysqli">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptMySQLSource.html#32" title="Go to source code"><var>$mysqli</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$mysqli" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="usersTable" id="$usersTable">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-CryptMySQLSource.html#33" title="Go to source code"><var>$usersTable</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$usersTable" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 
