@@ -93,26 +93,30 @@ function changePasswordCallback($oldCryptUser, $newCryptUser) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>CryptUser Encrypted Records</title>
+		
+		<style type="text/css">
+			table, th, td {
+				border: 1px solid black;
+			}
+			
+			td {
+				word-break: break-all;
+			}
+		</style>
     </head>
     <body>
 		<div>
-			<a href="index.php">Log Out</a>
+			Hello <?php echo $username; ?>
+			| <a href="index.php">[Log Out]</a>
 			<?php if ($theUser->isAdmin()) { ?>
-			| <a href="admin.php">Admin</a>
+			| <a href="admin.php">[Admin]</a>
 			<?php } ?>
 		</div>
 		
+		<?php if (!empty($errorMessage)) { ?>
 		<br>
-		
-		<div>
-			Welcome <?php echo $username; ?>
-		</div>
-		
-		<?php
-		if (!empty($errorMessage)) echo '<div style="color:red;">' . $errorMessage . '</div>';
-		?>
-		
-		<br>
+		<div style="color:red;"><?php echo $errorMessage; ?></div>
+		<?php } ?>
 		
 		<?php if (isset($_GET['decrypt'])) { ?>
 		<div>
@@ -124,8 +128,13 @@ function changePasswordCallback($oldCryptUser, $newCryptUser) {
 			if ($currentRecords[$_GET['decrypt']]) {
 				$record = $currentRecords[$_GET['decrypt']];
 				
-				echo 'Title: ' . $record['title'] . '<br>';
-				echo 'Record: <br>' . $theUser->decryptPackage($record['record']);
+				echo '<table>';
+				echo '<tr><th>Title:</th><td>' . $record['title'] . '</td></tr>';
+				echo '<tr><th>Decrypted</th><th>Encrypted</th></tr>';
+				echo '<tr><td>' . $theUser->decryptPackage($record['record']) . '</td>' .
+					'<td><b>Envelope:</b> ' . $record['record']['envelope'] . '<br>' .
+					'<b>Package:</b> ' . $record['record']['package'] . '</td></tr>';
+				echo '</table>';
 			}
 			else {
 				echo 'Record not found!';
@@ -139,40 +148,45 @@ function changePasswordCallback($oldCryptUser, $newCryptUser) {
 		<div>
 			<h3>Create New Record</h3>
 			<form method="post" action="home.php">
-				Title: <input type="text" name="title" /><br>
-				Record:<br>
+				Record Title:<br><input type="text" name="title" /><br>
+				Record Text:<br>
 				<textarea name="record"></textarea><br>
 				<button type="submit" name="submit" value="save_record">Save Record</button>
 			</form>
 		</div>
 		
+		<?php
+		$currentRecords = $recordDatasource->readJSONFile();
+		if (count($currentRecords)) {
+		?>
+		<br>
+		
 		<div>
 			<h3>Record List</h3>
-			<?php $currentRecords = $recordDatasource->readJSONFile(); ?>
-			<table style="border: 1px solid black;">
+			<table>
 				<tr><th>Title</th><th></th></tr>
 				<?php
-				if ($currentRecords) {
-					foreach($currentRecords as $recordIndex => $record) {
-						echo '<tr>' .
-							'<td>' . $record['title'] . '</td>' .
-							'<td>' .
-								'<a href="?delete=' . $recordIndex . '">Delete</a> | ' .
-								'<a href="?decrypt=' . $recordIndex . '">Decrypt</a>' .
-							'</td>' .
-							'</tr>';
-					}
+				foreach($currentRecords as $recordIndex => $record) {
+					echo '<tr>' .
+						'<td>' . $record['title'] . '</td>' .
+						'<td>' .
+							'<a href="?delete=' . $recordIndex . '">Delete</a> | ' .
+							'<a href="?decrypt=' . $recordIndex . '">Decrypt</a>' .
+						'</td>' .
+						'</tr>';
 				}
 				?>
 			</table>
 		</div>
+		<?php } ?>
 		
 		<br>
 		
 		<h3>Change Password</h3>
 		<div>
 			<form method="post" action="home.php">
-				New Password: <input type="text" name="password" /><br>
+				New Password:<br>
+				<input type="text" name="password" /><br>
 				<button type="submit" name="submit" value="change_password">Change Password</button>
 			</form>
 		</div>

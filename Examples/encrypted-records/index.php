@@ -89,8 +89,10 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'authenticate') {
 			if (!empty($errorMessage)) echo '<div style="color:red;">' . $errorMessage . '</div>';
 			?>
 			<form method="post" action="index.php">
-				Username: <input type="text" name="username" /><br>
-				Password: <input type="password" name="password" /><br>
+				Username:<br>
+				<input type="text" name="username" /><br>
+				Password:<br>
+				<input type="password" name="password" /><br>
 				<button type="submit" name="submit" value="authenticate">Log In</button>
 			</form>
 		</div>

@@ -91,30 +91,36 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_flags') {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>CryptUser Encrypted Records</title>
-    </head>
-    <body>
+		
+		<style type="text/css">
+			table, th, td {
+				border: 1px solid black;
+			}
+			
+			td {
+				word-break: break-all;
+			}
+		</style>
+	</head>
+	<body>
 		<div>
-			<a href="index.php">Log Out</a>
+			Hello <?php echo $username; ?>
+			| <a href="index.php">Log Out</a>
 			| <a href="home.php">Home</a>
 		</div>
 		
+		<?php if (!empty($errorMessage)) { ?>
 		<br>
-		
-		<div>
-			Welcome <?php echo $username; ?>
-		</div>
-		
-		<?php
-		if (!empty($errorMessage)) echo '<div style="color:red;">' . $errorMessage . '</div>';
-		?>
-		
-		<br>
+		<div style="color:red;"><?php echo $errorMessage; ?></div>
+		<?php } ?>
 		
 		<h3>Create new user</h3>
 		<div>
 			<form method="post" action="admin.php">
-				Username: <input type="text" name="username" /><br>
-				Password: <input type="text" name="password" /><br>
+				Username:<br>
+				<input type="text" name="username" /><br>
+				Password:<br>
+				<input type="text" name="password" /><br>
 				<input type="checkbox" name="active" value="1" /> Active &nbsp;&nbsp;<input type="checkbox" name="admin" value="1" /> Administrator<br>
 				<button type="submit" name="submit" value="create_user">Create User</button>
 			</form>
@@ -155,7 +161,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_flags') {
 					
 		if ($usernames) {
 			// display the list of users
-			echo '<table border="1">' . "\n";
+			echo '<table>' . "\n";
 			echo '<tr><th>Username</th><th>Active</th><th>Administrator</th><th></th></tr>' . "\n";
 			
 			// loop through all the names
