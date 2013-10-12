@@ -212,4 +212,3 @@ class CryptMySQLSource implements CryptDataSource {
 	}
 }
 
-?>

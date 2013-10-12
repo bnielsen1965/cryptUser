@@ -70,4 +70,3 @@ interface CryptDataSource {
 
 }
 
-?>

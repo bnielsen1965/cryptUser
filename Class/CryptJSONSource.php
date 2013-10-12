@@ -323,4 +323,3 @@ class CryptJSONSource implements CryptDataSource {
 	}
 }
 
-?>
