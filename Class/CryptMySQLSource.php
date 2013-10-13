@@ -204,6 +204,21 @@ class CryptMySQLSource implements CryptDataSource {
 	
 	
 	/**
+	 * Check to see if users table exists
+	 * 
+	 * @return boolean TRUE if table exists, FALSE if table does not exist.
+	 */
+	public function usersTableExists() {
+		if ($this->mysqli->ping()) {
+			$result = $this->mysqli->query("SHOW TABLES LIKE '" . $this->usersTable . "'");
+			return $result->num_rows > 0;
+		}
+
+		return FALSE;
+	}
+	
+	
+	/**
 	 * The magic __wakeup() function is used to reconnect to the database when
 	 * the object is unserialized.
 	 */
