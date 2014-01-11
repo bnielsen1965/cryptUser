@@ -74,7 +74,7 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 		
 		$testString = 'The quick brown fox.';
 		$eString = $user->encryptPackage($testString);
-		$dString = $user->decryptPackage($eString['package'], $eString['envelope']);
+		$dString = $user->decryptPackage($eString);
 		$this->assertEquals($testString, $dString, 'Encryption and decryption equal.');
 	}
 
