@@ -169,10 +169,17 @@ class SSLKey {
 	 * Parses the passed string looking for a phrase using PEM style
 	 * encoding. This is a custom PEM parameter for SSLKey.
 	 * @param string $str The string to parse looking for the pass phrase component.
+     * @param boolean $includeWrapper (optional) Specify if the PEM wrapper should be returned with the phrase.
 	 * @return string The discovered pass phrase or NULL if not found.
 	 */
-	public static function parsePhrase($str) {
-		if (preg_match('/(-----BEGIN PHRASE-----.*-----END PHRASE-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
+	public static function parsePhrase($str, $includeWrapper = FALSE) {
+        if ($includeWrapper) {
+            $regEx = '/(-----BEGIN PHRASE-----.*-----END PHRASE-----)/msU';
+        }
+        else {
+            $regEx = '/-----BEGIN PHRASE-----(.*)-----END PHRASE-----/msU';
+        }
+		if (preg_match($regEx, $str, $ma, PREG_OFFSET_CAPTURE)) {
 			return trim($ma[1][0]);
 		}
 
