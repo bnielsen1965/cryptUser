@@ -20,6 +20,8 @@
 * along with cryptUser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace BSN\CryptUser;
+
 /**
  * Provides encryption and decryption methods using openssl.
  *

@@ -20,6 +20,8 @@
 * along with cryptUser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace BSN\CryptUser;
+
 /**
  * The data source interface used to define functions required by any data source.
  *

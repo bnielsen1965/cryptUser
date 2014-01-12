@@ -1,0 +1,21 @@
+{
+    "name": "bsn/cryptuser",
+    "description": "User authentication, administration, and data encryption library.",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Bryan Nielsen",
+            "email": "bnielsen1965@gmail.com"
+        }
+    ],
+    "require": {
+	"php": ">=5.3",
+	"ext-mcrypt": "*",
+	"ext-openssl": "*"
+    },
+	"autoload": {
+		"psr-4": {
+			"BSN\\CryptUser\\": "BSN/CryptUser/"
+		}
+	}
+}
