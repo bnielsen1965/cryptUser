@@ -15,7 +15,7 @@
     },
 	"autoload": {
 		"psr-4": {
-			"BSN\\CryptUser\\": "BSN/CryptUser/"
+			"BSN\\CryptUser\\": ""
 		}
 	}
 }
