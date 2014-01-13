@@ -20,19 +20,19 @@
 * along with cryptUser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once 'Class/CryptUser.php';
+require_once 'CryptUser.php';
 
 /**
  * Description of CryptUserTest
  *
  * @author burnin
  */
-class CryptUserTest extends PHPUnit_Framework_TestCase {
+class CryptUserTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Test bestSalt function
 	 */
 	public function testBestSalt() {
-		$salt = CryptUser::bestSalt();
+		$salt = BSN\CryptUser\CryptUser::bestSalt();
 		$this->assertGreaterThan(0, strlen($salt), 'Best salt string length.');
 	}
 	
@@ -41,11 +41,11 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 	 * Test hashPassword function
 	 */
 	public function testHashPassword() {
-		$salt = CryptUser::bestSalt();
+		$salt = BSN\CryptUser\CryptUser::bestSalt();
 		$password = 'testPassword';
 		
-		$hash = CryptUser::hashPassword($password, $salt);
-		$this->assertEquals($hash, CryptUser::hashPassword($password, $hash), 'Hash passwords equal.');
+		$hash = BSN\CryptUser\CryptUser::hashPassword($password, $salt);
+		$this->assertEquals($hash, BSN\CryptUser\CryptUser::hashPassword($password, $hash), 'Hash passwords equal.');
 	}
 	
 	
@@ -54,10 +54,10 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testACLFlags() {
 		// create a dummy user with no data source
-		$user = new CryptUser('dummy', 'dummyPassword');
+		$user = new BSN\CryptUser\CryptUser('dummy', 'dummyPassword');
 		
 		// set admin and active flags for the dummy
-		$user->setACLFlags(CryptUser::ACL_ADMIN_FLAG | CryptUser::ACL_ACTIVE_FLAG);
+		$user->setACLFlags(BSN\CryptUser\CryptUser::ACL_ADMIN_FLAG | BSN\CryptUser\CryptUser::ACL_ACTIVE_FLAG);
 		$this->assertTrue($user->isActive() && $user->isAdmin(), 'ACL flags set.');
 	}
 	
@@ -67,7 +67,7 @@ class CryptUserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testEncryption() {
 		// create a dummy user with no data source
-		$user = new CryptUser('dummy', 'dummyPassword');
+		$user = new BSN\CryptUser\CryptUser('dummy', 'dummyPassword');
 		
 		// set encryption key
 		$user->setPrimaryKey();

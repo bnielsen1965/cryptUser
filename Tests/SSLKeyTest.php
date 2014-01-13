@@ -20,7 +20,7 @@
 * along with cryptUser.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once 'Class/SSLKey.php';
+require_once 'SSLKey.php';
 
 /**
  * Description of SSLKeyTest
@@ -33,7 +33,7 @@ class SSLKeyTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testMakePhrase() {
 		$phraseLength = 32;
-		$phrase = SSLKey::makePhrase($phraseLength);
+		$phrase = BSN\CryptUser\SSLKey::makePhrase($phraseLength);
 		$this->assertEquals($phraseLength, strlen($phrase), 'Make phrase string length.');
 	}
 	
@@ -42,9 +42,9 @@ class SSLKeyTest extends PHPUnit_Framework_TestCase {
 	 * Verify string encryption
 	 */
 	public function testEncrypt() {
-		$phrase = SSLKey::makePhrase(4);
+		$phrase = BSN\CryptUser\SSLKey::makePhrase(4);
 
-		$key = new SSLKey($phrase);
+		$key = new BSN\CryptUser\SSLKey($phrase);
 
 		$string = "The quick brown fox.";
 
@@ -58,9 +58,9 @@ class SSLKeyTest extends PHPUnit_Framework_TestCase {
 	 * Verify encryption returns required array elements
 	 */
 	public function testEncryptReturnsArray() {
-		$phrase = SSLKey::makePhrase(4);
+		$phrase = BSN\CryptUser\SSLKey::makePhrase(4);
 
-		$key = new SSLKey($phrase);
+		$key = new BSN\CryptUser\SSLKey($phrase);
 
 		$string = "The quick brown fox.";
 
@@ -74,9 +74,9 @@ class SSLKeyTest extends PHPUnit_Framework_TestCase {
 	 * Verify decryption works.
 	 */
 	public function testDecrypt() {
-		$phrase = SSLKey::makePhrase(4);
+		$phrase = BSN\CryptUser\SSLKey::makePhrase(4);
 
-		$key = new SSLKey($phrase);
+		$key = new BSN\CryptUser\SSLKey($phrase);
 
 		$string = "The quick brown fox.";
 
@@ -92,11 +92,11 @@ class SSLKeyTest extends PHPUnit_Framework_TestCase {
 	 * Verify can parse passphrase from PEM key
 	 */
 	public function testParsePhrase() {
-		$phrase = SSLKey::makePhrase(4);
+		$phrase = BSN\CryptUser\SSLKey::makePhrase(4);
 
-		$key = new SSLKey($phrase);
+		$key = new BSN\CryptUser\SSLKey($phrase);
 
-		$string = SSLKey::parsePhrase($key->getFullKey());
+		$string = BSN\CryptUser\SSLKey::parsePhrase($key->getFullKey());
 
 		$this->assertEquals($phrase, $string, 'Parse phrase from full PEM key.');
 	}
