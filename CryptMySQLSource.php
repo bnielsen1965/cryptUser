@@ -21,6 +21,7 @@
 */
 
 namespace BSN\CryptUser;
+use Exception, mysqli;
 
 require_once 'CryptDataSource.php';
 

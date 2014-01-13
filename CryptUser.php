@@ -21,6 +21,7 @@
 */
 
 namespace BSN\CryptUser;
+use Exception;
 
 require_once 'SSLKey.php';
 

@@ -6,9 +6,12 @@
  * processed.
  */
 
+namespace BSN\CryptUser;
+use Exception;
+
 // The user class and a datasource class are required.
-require_once '../../Class/CryptUser.php';
-require_once '../../Class/CryptMySQLSource.php';
+require_once '../../CryptUser.php';
+require_once '../../CryptMySQLSource.php';
 
 // the MySQL data source will require the connection settings.
 $databaseConfig = array(
@@ -221,7 +224,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'change_password') {
 		$oldPackage = $theUser->encryptPackage('The quick brown fox.');
 		
 		// call the password change function with a callback function name
-		$result = $theUser->changePassword($_POST['password'], "encryptionCallback");
+		$result = $theUser->changePassword($_POST['password'], __NAMESPACE__ . "\\encryptionCallback");
 		
 		// warn the user if the change password with callback fails
 		if ($result === FALSE) {

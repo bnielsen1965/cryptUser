@@ -21,6 +21,7 @@
 */
 
 namespace BSN\CryptUser;
+use Exception;
 
 /**
  * Provides encryption and decryption methods using openssl.
