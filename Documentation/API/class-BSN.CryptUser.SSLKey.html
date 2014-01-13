@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class BSN\CryptUser\SSLKey | cryptUser</title>
+
+	<script type="text/javascript" src="resources/combined.js?368157054"></script>
+	<script type="text/javascript" src="elementlist.js?3894448163"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-BSN.html">BSN<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-BSN.CryptUser.html">CryptUser</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-BSN.CryptUser.CryptJSONSource.html">CryptJSONSource</a></li>
+				<li><a href="class-BSN.CryptUser.CryptMySQLSource.html">CryptMySQLSource</a></li>
+				<li><a href="class-BSN.CryptUser.CryptUser.html">CryptUser</a></li>
+				<li class="active"><a href="class-BSN.CryptUser.SSLKey.html">SSLKey</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-BSN.CryptUser.CryptDataSource.html">CryptDataSource</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-BSN.CryptUser.html" title="Summary of BSN\CryptUser"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class SSLKey</h1>
+
+
+	<div class="description">
+	
+<p>Provides encryption and decryption methods using openssl.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-BSN.html">BSN</a>\<a href="namespace-BSN.CryptUser.html">CryptUser</a><br />
+		
+
+				<b>Copyright:</b>
+				Copyright 2013, Bryan Nielsen<br />
+				<b>Author:</b>
+				Bryan Nielsen, <a
+href="mailto:bnielsen1965&#64;gmail.com">bnielsen1965&#64;<!---->gmail.com</a><br />
+		<b>Located at</b> <a href="source-class-BSN.CryptUser.SSLKey.html#26-343" title="Go to source code">Class/SSLKey.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#43-108" title="Go to source code">__construct</a>( <span>string <var>$phrase</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>$key</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$cert</var> = <span class="php-keyword1">NULL</span></span>, <span>array <var>$SSLParams</var> = <span class="php-keyword1">NULL</span></span>, <span>array <var>$CACert</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Object constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Object constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$phrase</var></dt>
+					<dd><code>string</code><br>$phrase Passphrase to use with protected key.</dd>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key A PEM encoded private key, NULL when creating a new key pair.</dd>
+					<dt><var>$cert</var></dt>
+					<dd><code>string</code><br>$cert A PEM encoded certificate, NULL when creating a new key pair.</dd>
+					<dt><var>$SSLParams</var></dt>
+					<dd><code>array</code><br>$SSLParams Associative array of parameters used when creating a new key pair.
+The array is a combination of the Distinquished Name and configargs values. The
+array may include the following... 'ssl_key_bits' =&gt; '4096', // bit size of
+the encryption key 'private_key_type' =&gt; OPENSSL_KEYTYPE_RSA, // the openssl
+key type 'countryName' =&gt; 'US', // distinquished name country
+'stateOrProvinceName' =&gt; 'Nevada', // distinquished name province
+'localityName' =&gt; 'Las Vegas', // distinquished name locality
+'organizationName' =&gt; 'SSLKey', // distinquished name organization
+'commonName' =&gt; 'localhost', // distinquished name domain 'emailAddress'
+=&gt; 'admin@localhost' // distinquished name email</dd>
+					<dt><var>$CACert</var></dt>
+					<dd><code>array</code><br>$CACert Associative array containing a certificate authority parameters used to
+sign a new key pair. If NULL then the new key pair will be self signed. The
+array must include the following elements... 'certificate' =&gt; CA certificate
+in PEM format, 'privateKey' =&gt; CA private key in PEM format, 'passPhrase'
+=&gt; CA passphrase.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="decryptPackage" id="_decryptPackage">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_decryptPackage">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#111-137" title="Go to source code">decryptPackage</a>( <span>string <var>$package</var></span>, <span>mixed <var>$envelope</var></span>, <span>string <var>$phrase</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Decrypt the sealed package using this SSL key pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Decrypt the sealed package using this SSL key pair.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$package</var></dt>
+					<dd><code>string</code><br>$package The package to decrypt.</dd>
+					<dt><var>$envelope</var></dt>
+					<dd><code>mixed</code><br>$envelope The envelope for the package.</dd>
+					<dt><var>$phrase</var></dt>
+					<dd><code>string</code><br>$phrase The passphrase to use as the pass phrase for decryption.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>The decrypted package or FALSE if there was an error.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="encryptPackage" id="_encryptPackage">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_encryptPackage">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#140-168" title="Go to source code">encryptPackage</a>( <span>mixed <var>$package</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Encrypt a package using this SSL key pair.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Encrypt a package using this SSL key pair.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$package</var></dt>
+					<dd><code>mixed</code><br>$package The package to encrypt.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array containing the envelope and encrypted package or NULL if an error
+occurs.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parsePhrase" id="_parsePhrase">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parsePhrase">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#171-190" title="Go to source code">parsePhrase</a>( <span>string <var>$str</var></span>, <span>boolean <var>$includeWrapper</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Parses the passed string looking for a phrase using PEM style encoding. This
+is a custom PEM parameter for SSLKey.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parses the passed string looking for a phrase using PEM style encoding. This
+is a custom PEM parameter for SSLKey.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$str</var></dt>
+					<dd><code>string</code><br>$str The string to parse looking for the pass phrase component.</dd>
+					<dt><var>$includeWrapper</var></dt>
+					<dd><code>boolean</code><br>$includeWrapper (optional) Specify if the PEM wrapper should be returned with
+the phrase.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The discovered pass phrase or NULL if not found.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseCertificate" id="_parseCertificate">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseCertificate">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#193-204" title="Go to source code">parseCertificate</a>( <span>string <var>$str</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parses the passed string looking for a certificate.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parses the passed string looking for a certificate.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$str</var></dt>
+					<dd><code>string</code><br>$str The string to parse looking for the certificate component.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The discovered certificate or NULL if not found.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parsePrivateKey" id="_parsePrivateKey">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parsePrivateKey">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#207-218" title="Go to source code">parsePrivateKey</a>( <span>string <var>$str</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Parses the passed string looking for a private key.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Parses the passed string looking for a private key.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$str</var></dt>
+					<dd><code>string</code><br>$str The string to parse looking for the private key component.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The discovered private key or NULL if not found.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="makePhrase" id="_makePhrase">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makePhrase">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#221-242" title="Go to source code">makePhrase</a>( <span>integer <var>$len</var> = <span class="php-num">64</span></span>, <span>boolean <var>$alphanumeric</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates a random passphrase.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates a random passphrase.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$len</var></dt>
+					<dd><code>integer</code><br>$len The length of the generated pass phrase.</dd>
+					<dt><var>$alphanumeric</var></dt>
+					<dd><code>boolean</code><br>$alphnumeric Determines if the generated pass phrase includes only alphanumeric
+characters.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The generated pass phrase.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPrivateKey" id="_getPrivateKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPrivateKey">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#245-250" title="Go to source code">getPrivateKey</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve the private key from this instance.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve the private key from this instance.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCertificate" id="_getCertificate">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCertificate">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#253-258" title="Go to source code">getCertificate</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve the certificate from this instance.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve the certificate from this instance.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getKey" id="_getKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getKey">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#261-268" title="Go to source code">getKey</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve the PEM encoded key (privateKey + certificate)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve the PEM encoded key (privateKey + certificate)</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFullKey" id="_getFullKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFullKey">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#271-283" title="Go to source code">getFullKey</a>( )</code>
+
+		<div class="description short">
+			
+<p>Retrieve a custom PEM encoded key with all needed components for encryption
+and decryption.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve a custom PEM encoded key with all needed components for encryption
+and decryption.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="makeDN" id="_makeDN">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makeDN">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#286-310" title="Go to source code">makeDN</a>( <span>array <var>$sslParams</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates a distinquished name array for SSL certificate generation.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates a distinquished name array for SSL certificate generation.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sslParams</var></dt>
+					<dd><code>array</code><br>$sslParams The parameters to use when generating the distinquished name.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="makeConfigArgs" id="_makeConfigArgs">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_makeConfigArgs">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#313-333" title="Go to source code">makeConfigArgs</a>( <span>array <var>$sslParams</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates a configArgs array to be used when creating certificates</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates a configArgs array to be used when creating certificates</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sslParams</var></dt>
+					<dd><code>array</code><br>$sslParams The parameters to use when generating the configArgs.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getErrors" id="_getErrors">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getErrors">#</a>
+		<code><a href="source-class-BSN.CryptUser.SSLKey.html#336-341" title="Go to source code">getErrors</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the current errors.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the current errors.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="passphrase" id="$passphrase">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-BSN.CryptUser.SSLKey.html#34-37" title="Go to source code"><var>$passphrase</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$passphrase" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Class properties</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Class properties</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="privateKey" id="$privateKey">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-BSN.CryptUser.SSLKey.html#38" title="Go to source code"><var>$privateKey</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$privateKey" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="certificate" id="$certificate">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-BSN.CryptUser.SSLKey.html#39" title="Go to source code"><var>$certificate</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$certificate" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="errors" id="$errors">
+		<td class="attributes"><code>
+			private  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-BSN.CryptUser.SSLKey.html#40" title="Go to source code"><var>$errors</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$errors" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		cryptUser API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
