@@ -85,3 +85,23 @@ appropriately in the example index.php file.
 
 ---------------------------------
 
+
+# BRANCH STRATEGY
+
+## master
+
+The master branch contains the stable release versions.
+
+
+## full
+The full branch contains the stable release plus all documentation and examples.
+
+
+## develop
+
+The develop branch is unstable under development code.
+
+
+
+---------------------------------
+
