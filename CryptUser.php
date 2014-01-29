@@ -90,14 +90,20 @@ class CryptUser {
 			if ($this->passwordHash == $this->hashPassword($this->password, $this->passwordHash)) {
 				// authentication passed
 				$this->authenticated = TRUE;
-				
-				// set the user's primary SSL key
-				$this->setPrimaryKey(SSLKey::parsePrivateKey($this->sslKey), SSLKey::parseCertificate($this->sslKey));
 			}
 			else {
 				// authentication failed
 				$this->authenticated = FALSE;
 			}
+            
+            // get key parts from user data
+            $pkey = SSLKey::parsePrivateKey($this->sslKey);
+            $cert = SSLKey::parseCertificate($this->sslKey);
+            
+            // set the primary SSLKey for this user if we have key parts
+            if (!empty($pkey) || !empty($cert)) {
+                $this->setPrimaryKey($pkey, $cert);
+            }
 			
 			// load successful
 			return TRUE;
