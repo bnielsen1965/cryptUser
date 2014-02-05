@@ -210,7 +210,7 @@ class SSLKey {
 	 * @return string The discovered private key or NULL if not found.
 	 */
 	public static function parsePrivateKey($str) {
-		if (preg_match('/(-----BEGIN ENCRYPTED PRIVATE KEY-----.*-----END ENCRYPTED PRIVATE KEY-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
+		if (preg_match('/(-----BEGIN .*PRIVATE KEY-----.*-----END .*PRIVATE KEY-----)/msU', $str, $ma, PREG_OFFSET_CAPTURE)) {
 			return trim($ma[1][0]);
 		}
 
