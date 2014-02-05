@@ -93,13 +93,23 @@ class SSLKey {
 					if ($rawCert) {
 						// export certificate in PEM format
 						if (!openssl_x509_export($rawCert, $cert))
-							$this->errors[] = "Error exporting certificate in PEM format. ";
+                                                    $this->errors[] = "Error exporting certificate in PEM format. ";
+                                                    $this->errors[] = openssl_error_string();
 					}
-					else $this->error[] = "Error signing certificate. ";
+					else {
+                                            $this->error[] = "Error signing certificate. ";
+                                            $this->errors[] = openssl_error_string();
+                                        }
 				}
-				else $this->errors[] = "Error generating certificate signing request. ";
+				else {
+                                    $this->errors[] = "Error generating certificate signing request. ";
+                                    $this->errors[] = openssl_error_string();
+                                }
 			}
-			else $this->errors[] = "Error exporting private key. ";
+			else {
+                            $this->errors[] = "Error exporting private key. ";
+                            $this->errors[] = openssl_error_string();
+                        }
 		}
 
 		$this->privateKey = $key;
@@ -124,12 +134,14 @@ class SSLKey {
 		// try to get the private key from the certificate
 		if (($key = openssl_get_privatekey($this->privateKey, $phrase)) === FALSE) {
 			$this->errors[] = 'Failed to get private key!';
+                        $this->errors[] = openssl_error_string();
 			return NULL;
 		}
 		
 		// try to decrypt the package
 		if ((openssl_open($package, $decrypted, $envelope, $key)) === FALSE) {
 			$this->errors[] = 'Failed to decrypt package!';
+                        $this->errors[] = openssl_error_string();
 			return NULL;
 		}
 		
@@ -275,10 +287,7 @@ class SSLKey {
 		// assemble all key components into a single PEM string.
 		$key = "-----BEGIN PHRASE-----\n" . $this->passphrase . "\n-----END PHRASE-----\n\n";
 		$key .= $this->getKey();
-		/*
-		$key .= $this->getPrivateKey();
-		$key .= $this->getCertificate();
-		 */
+                
 		return $key;
 	}
 
