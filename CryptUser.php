@@ -339,6 +339,15 @@ class CryptUser {
 	public function getDatasource() {
 		return $this->dataSource;
 	}
+        
+        
+        /*
+         * Get SSL Key error messages
+         * @return array The array of strings containing any SSL Key error messages.
+         */
+        public function getKeyErrors() {
+            return $this->primaryKey->getErrors();
+        }
 	
 	
 	/**

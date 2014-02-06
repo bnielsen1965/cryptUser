@@ -69,6 +69,14 @@ class CryptMySQLSource implements CryptDataSource {
 			}
 		}
 	}
+
+	
+	/**
+	 * Get the mysqli object
+	 */
+	public function getMysqli() {
+		return $this->mysqli;
+	}
 	
 	
 	/**
