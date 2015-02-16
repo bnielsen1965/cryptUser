@@ -275,7 +275,7 @@ class SSLKey {
 	 */
 	public function getKey() {
 		$key = $this->getPrivateKey();
-		$key .- $this->getCertificate();
+		$key .= $this->getCertificate();
 		return $key;
 	}
 	
